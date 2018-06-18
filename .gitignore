@@ -19,3 +19,5 @@ local.properties
 
 proguard/
 
+node_modules/
+
