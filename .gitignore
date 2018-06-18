@@ -13,6 +13,7 @@ out/
 
 .gradle/
 build/
+
 *.ser
 
 local.properties
