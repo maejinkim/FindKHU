@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">FindKHU</string>
+
+
+    <string name="title_home">홈</string>
+    <string name="title_mypage">마이페이지</string>
+    <string name="title_find">찾기</string>
+    <string name="title_lose">습득</string>
+    <string name="title_community">커뮤니티</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="lost_board">분실물 게시판</string>
+    <string name="get_board">습득물 게시판</string>
+    <string name="complete_board">완료 게시판</string>
+    <string name="lost_center">분실물 센터 안내</string>
+
+    <string name="nav_sub_menu">Sub Menu</string>
+    <string name="nav_sub_menu_item01">Sub Menu Item 1</string>
+    <string name="nav_sub_menu_item02">Sub Menu Item 2</string>
+
+    <string name="drawer_header_text">최소정 님</string>
+    <string name="second_activity_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur diam id aliquam scelerisque. Donec ultrices lacus vel dignissim pharetra. Vivamus pharetra augue quis rhoncus placerat. Sed ultricies at risus non cursus. Nam rutrum leo nec placerat consectetur. Vestibulum feugiat eleifend diam, nec interdum augue tincidunt sit amet. Praesent feugiat est auctor lacus consectetur, vitae pellentesque dolor laoreet.</string>
+    <string name="title_activity_second">SecondActivity</string>
+
+
+</resources>

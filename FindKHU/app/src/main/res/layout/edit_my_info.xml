@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginStart="5mm"
+        android:layout_marginTop="6mm"
+        android:textSize="20dp"
+        android:text="회원정보 수정"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        />
+
+    <GridLayout
+        android:layout_marginStart="13mm"
+        android:layout_marginTop="6mm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:columnCount="2">
+
+        <TextView
+            android:id="@+id/u_name"
+            android:layout_gravity="right"
+            android:text="이름" />
+
+        <TextView
+            android:id="@+id/m_name"
+            android:layout_marginLeft="13dp"
+            android:text="최소정"
+            android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+            android:textSize="17dp" />
+
+        <TextView
+            android:id="@+id/u_pw"
+            android:layout_gravity="right"
+            android:text="비밀번호" />
+
+        <EditText
+            android:id="@+id/m_pw"
+            android:layout_marginLeft="5dp"
+            android:text="password" />
+
+        <TextView
+            android:id="@+id/u_phone"
+            android:layout_gravity="right"
+            android:text="Phone" />
+
+        <EditText
+            android:id="@+id/m_phone"
+            android:layout_marginLeft="5dp"
+            android:text="01023036384" />
+
+        <TextView
+            android:id="@+id/u_major"
+            android:layout_gravity="right"
+            android:text="학과" />
+
+        <EditText
+            android:id="@+id/m_major"
+            android:layout_marginLeft="5dp"
+            android:text="컴퓨터공학과" />
+
+        <TextView
+            android:id="@+id/u_nickname"
+            android:layout_gravity="right"
+            android:text="닉네임" />
+
+        <EditText
+            android:id="@+id/m_nickname"
+            android:layout_marginLeft="5dp"
+            android:text="myname" />
+
+
+    </GridLayout>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="103dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal|center">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="26dp">
+
+            <Button
+                android:id="@+id/not_edit_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="취소" />
+
+            <Button
+                android:id="@+id/edit_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="수정" />
+        </TableRow>
+
+        />
+    </TableLayout>
+
+</LinearLayout>

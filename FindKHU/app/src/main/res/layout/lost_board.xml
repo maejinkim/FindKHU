@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        android:layout_marginTop="20dp">
+
+        <TableRow>
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/human"
+            android:text="사람"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="분실물 게시판"
+            android:textSize="13pt"
+            android:gravity="center"
+            />
+
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/btn_search"
+            android:text="검색"
+            />
+        </TableRow>
+    </TableLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btn_view_map"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="30dp"
+            android:background="#a3a3a3"
+            android:text="지도" />
+
+        <Button
+            android:id="@+id/btn_view_board"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:background="#a3a3a3"
+            android:text="게시판" />
+
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="100dp"
+            android:text="글쓰기" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#a3a3a3"
+        android:id="@+id/map_layout">
+    </FrameLayout>
+
+
+
+</LinearLayout>
