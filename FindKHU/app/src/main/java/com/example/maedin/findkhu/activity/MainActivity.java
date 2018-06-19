@@ -1,4 +1,4 @@
-package com.example.maedin.findkhu;
+package com.example.maedin.findkhu.activity;
 
 import android.app.FragmentManager;
 import android.support.annotation.NonNull;
@@ -13,6 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.example.maedin.findkhu.fragment.CenterInfo;
+import com.example.maedin.findkhu.fragment.CompleteBoard;
+import com.example.maedin.findkhu.fragment.FindBoard;
+import com.example.maedin.findkhu.fragment.Home;
+import com.example.maedin.findkhu.fragment.LostBoard;
+import com.example.maedin.findkhu.fragment.MyPage;
+import com.example.maedin.findkhu.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 

@@ -1,4 +1,4 @@
-package com.example.maedin.findkhu;
+package com.example.maedin.findkhu.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -7,17 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ContentMain extends Fragment {
+import com.example.maedin.findkhu.R;
 
-    View v;
+public class CompleteBoard extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-
-        //inflate메소드는 XML데이터를 가져와서 실제 View객체로 만드는 작업을 합니다.
-        v = inflater.inflate(R.layout.content_main, container, false);
-
-        return v;
+        return inflater.inflate(R.layout.complete_board, container, false);
     }
 }

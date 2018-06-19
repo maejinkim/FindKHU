@@ -1,4 +1,4 @@
-package com.example.maedin.findkhu;
+package com.example.maedin.findkhu.fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.maedin.findkhu.R;
 
 public class FindBoard extends Fragment implements View.OnClickListener {
 
