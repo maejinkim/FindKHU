@@ -14,11 +14,10 @@ out/
 .gradle/
 build/
 
-*.ser
-
 local.properties
 
 proguard/
 
 node_modules/
 
+*.ser
