@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); //activity actionbar로 대체
 
@@ -36,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //NavigationView 지정, 클릭시 setNavigationItemSelected로 이동
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.content_main, new Home())
+                .commit();
     }
 
     @Override
@@ -61,11 +68,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id) {
             case R.id.navigation_item_lost:
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main, new LostBoard())
+                        .commit();
                 break;
 
             case R.id.navigation_item_find:
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main, new FindBoard())
+                        .commit();
                 break;
 
             case R.id.navigation_item_complete:
@@ -73,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.navigation_item_center:   //분실물 센터 버튼 눌리면 실행
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
 
                 getFragmentManager()
                         .beginTransaction()
@@ -81,7 +94,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .commit();
 
                // manager.beginTransaction().replace(R.id.content_main, new CenterInfo()).commit();
+                break;
 
+            case R.id.navigation_home:
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main, new Home())
+                        .commit();
+                break;
+
+            case R.id.navigation_mypage:
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main, new Home())
+                        .commit();
+                break;
+
+            case R.id.navigation_notice:
+                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.navigation_search:
+                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
                 break;
         }
 
