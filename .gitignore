@@ -21,3 +21,4 @@ proguard/
 node_modules/
 
 *.ser
+FindKHU/.idea/caches/build_file_checksums.ser
