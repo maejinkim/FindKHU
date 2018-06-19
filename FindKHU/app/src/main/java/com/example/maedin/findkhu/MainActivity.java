@@ -1,5 +1,7 @@
 package com.example.maedin.findkhu;
 
+import android.app.FragmentManager;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -11,10 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,39 +23,66 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar); //activity actionbar로 대체
+
+        //ActionBar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
+        //drawerLayout 지정
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        //NavigationView 지정, 클릭시 setNavigationItemSelected로 이동
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                menuItem.setChecked(true);
-                mDrawerLayout.closeDrawers();
+        navigationView.setNavigationItemSelectedListener(this);
+    }
 
-                int id = menuItem.getItemId();
-                switch (id) {
-                    case R.id.navigation_item_attachment:
-                        Toast.makeText(MainActivity.this, menuItem.getTitle(), Toast.LENGTH_LONG).show();
-                        break;
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
-                    case R.id.navigation_item_images:
-                        Toast.makeText(MainActivity.this, menuItem.getTitle(), Toast.LENGTH_LONG).show();
-                        break;
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                    case R.id.navigation_item_location:
-                        Toast.makeText(MainActivity.this, menuItem.getTitle(), Toast.LENGTH_LONG).show();
-                        break;
+        item.setChecked(true);
 
-                }
-                return true;
-            }
-        });
+        int id = item.getItemId();
+        FragmentManager manager = getFragmentManager();
+
+
+
+        switch (id) {
+            case R.id.navigation_item_lost:
+                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.navigation_item_find:
+                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.navigation_item_complete:
+                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                break;
+
+            case R.id.navigation_item_center:   //분실물 센터 버튼 눌리면 실행
+                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+
+                manager.beginTransaction().replace(R.id.content_main, new CenterInfo()).commit();
+
+                break;
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);//Drawer를 닫음
+        return true;
     }
 
     @Override
@@ -80,5 +108,4 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }
