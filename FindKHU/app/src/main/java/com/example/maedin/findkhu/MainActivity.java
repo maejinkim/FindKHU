@@ -83,7 +83,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.navigation_item_complete:
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main, new CompleteBoard())
+                        .commit();
                 break;
 
             case R.id.navigation_item_center:   //분실물 센터 버튼 눌리면 실행
