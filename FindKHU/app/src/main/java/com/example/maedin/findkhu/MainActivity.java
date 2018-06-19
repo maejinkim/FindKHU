@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         item.setChecked(true);
 
         int id = item.getItemId();
-        FragmentManager manager = getFragmentManager();
+       // FragmentManager manager = getFragmentManager();
 
 
 
@@ -75,7 +75,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navigation_item_center:   //분실물 센터 버튼 눌리면 실행
                 Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
 
-                manager.beginTransaction().replace(R.id.content_main, new CenterInfo()).commit();
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content_main, new CenterInfo())
+                        .commit();
+
+               // manager.beginTransaction().replace(R.id.content_main, new CenterInfo()).commit();
 
                 break;
         }
