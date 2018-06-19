@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/lost_post_layout">
+    android:id="@+id/find_post_layout">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="분실물 등록"
+        android:text="습득물 등록"
         android:textSize="13pt"
         android:gravity="center"
         android:layout_marginTop="20dp"        />
@@ -23,7 +23,7 @@
         <TextView
             android:text="제목"
             android:layout_gravity="center"
-            android:id="@+id/edit_lost_title"
+            android:id="@+id/edit_find_title"
             android:textSize="10pt" />
 
         <EditText
@@ -48,7 +48,7 @@
 
         <EditText
             android:width="200dp"
-            android:id="@+id/edit_lost_date"
+            android:id="@+id/edit_find_date"
             />
 
 
@@ -61,7 +61,7 @@
             android:layout_width="100dp"
             android:layout_gravity="center"
             android:text="지도"
-            android:id="@+id/btn_select_map"
+            android:id="@+id/btn_select_find_map"
             />
 
         <EditText
@@ -70,7 +70,7 @@
             android:layout_height="150dp"
             android:layout_gravity="fill_horizontal"
             android:background="#b8b8b8"
-            android:id="@+id/edit_lost_contents"/>
+            android:id="@+id/edit_find_contents"/>
 
 
         <TextView
@@ -83,7 +83,7 @@
             android:layout_width="60dp"
             android:layout_height="50dp"
             android:textSize="5pt"
-            android:id="@+id/btn_lost_pic"/>
+            android:id="@+id/btn_find_pic"/>
 
         <Button
             android:text="등록"

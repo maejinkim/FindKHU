@@ -2,13 +2,11 @@
     <string name="app_name">FindKHU</string>
 
 
-    <string name="title_home">홈</string>
-    <string name="title_mypage">마이페이지</string>
-    <string name="title_find">찾기</string>
-    <string name="title_lose">습득</string>
-    <string name="title_community">커뮤니티</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_home">HOME</string>
+    <string name="title_mypage">MYPAGE</string>
+    <string name="title_notice">NOTICE</string>
+    <string name="title_search">SEARCH</string>
+
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>

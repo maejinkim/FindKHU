@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/lost_board_layout">
+    android:id="@+id/find_board_layout">
 
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="분실물 게시판"
+        android:text="습득물 게시판"
         android:textSize="13pt"
         android:gravity="center"
         android:layout_marginTop="20dp"        />
@@ -22,7 +22,7 @@
         android:layout_marginTop="20dp">
 
         <Button
-            android:id="@+id/btn_view_lost_map"
+            android:id="@+id/btn_view_find_map"
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_gravity="bottom"
@@ -31,7 +31,7 @@
             android:text="지도" />
 
         <Button
-            android:id="@+id/btn_view_lost_board"
+            android:id="@+id/btn_view_find_board"
             android:layout_width="70dp"
             android:layout_height="40dp"
             android:layout_gravity="bottom"
@@ -39,7 +39,7 @@
             android:text="게시판" />
 
         <Button
-            android:id="@+id/btn_lost_post"
+            android:id="@+id/btn_find_post"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginLeft="100dp"
@@ -51,9 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#a3a3a3"
-        android:id="@+id/map_layout">
+        android:id="@+id/find_map_layout">
     </FrameLayout>
-
-
 
 </LinearLayout>

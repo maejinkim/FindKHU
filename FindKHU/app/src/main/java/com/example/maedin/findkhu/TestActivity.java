@@ -1,8 +1,14 @@
 package com.example.maedin.findkhu;
 
+<<<<<<< HEAD
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+=======
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+>>>>>>> 1eb93bda9f7838ab8df7c5e7c8aaa3724157f647
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -25,8 +31,16 @@ public class TestActivity extends Fragment {
     TextView textViewIndex, textViewPost, textViewMap;
     static final String URL = "http://www.dxmnd.com/blog/";
 
+<<<<<<< HEAD
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_retrofit, container, false);
+=======
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_test);
+>>>>>>> 1eb93bda9f7838ab8df7c5e7c8aaa3724157f647
 
         textViewIndex = (TextView)mView.findViewById(R.id.txtRetrofitTest);
         textViewPost = (TextView)mView.findViewById(R.id.txtRetrofitPost);
