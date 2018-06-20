@@ -2,6 +2,7 @@ package com.example.maedin.findkhu.remote;
 
 import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.item.KeepItem;
+import com.example.maedin.findkhu.item.LoginItem;
 import com.example.maedin.findkhu.item.MemberInfoItem;
 
 import java.util.ArrayList;
@@ -88,10 +89,10 @@ public interface IRemoteService {
     Call<MemberInfoItem> selectMemberInfo(@Path("id") String phone);
 
 
-    // 서버에 번호로 계정 등록
-    @FormUrlEncoded
-    @POST("/member/id")
-    Call<ResponseBody> insertMemberPhone(@Field("id") String id);
+//    // 서버에 번호로 계정 등록
+//    @FormUrlEncoded
+//    @POST("/member/id")
+//    Call<ResponseBody> insertMemberPhone(@Field("id") String id);
 
 
     /**
@@ -100,6 +101,13 @@ public interface IRemoteService {
     // 서버에 사용자 계정 등록
     @POST("/member/info")
     Call<ResponseBody> insertMemberInfo(@Body MemberInfoItem memberInfoItem);
+
+    /**
+     * ProfileActivity
+     */
+    // 서버에 사용자 계정 등록
+    @POST("/member/id")
+    Call<MemberInfoItem> loginCheck(@Body LoginItem loginItem);
 
 
     /**
