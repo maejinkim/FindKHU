@@ -91,7 +91,7 @@ public interface IRemoteService {
     // 서버에 번호로 계정 등록
     @FormUrlEncoded
     @POST("/member/id")
-    Call<ResponseBody> insertMemberPhone(@Field("id") String phone);
+    Call<ResponseBody> insertMemberPhone(@Field("id") String id);
 
 
     /**

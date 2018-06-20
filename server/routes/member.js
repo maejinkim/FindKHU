@@ -1,6 +1,7 @@
 var express = require('express');
 var formidable = require('formidable');
 var db = require('../db.js')
+const sha256 = require('sha256');
 var router = express.Router();
 
 //member/:id
@@ -66,29 +67,31 @@ router.post('/info', function(req, res) {
   // 컨버터팩토리를 사용했기 때문에 분리되어서 꺼낼 수 있는 듯 하다
   // 그런게 아니라 노드 서버에서 body-parser 모듈을 사용했기 때문에 json으로 전달되는 데이터가
   // 분리되어 들어오는 것이다.
-  var phone = req.body.phone;
+  var id = req.body.id;
+  var pw = sha256(req.body.pw);
   var name = req.body.name;
-  var sextype = req.body.sextype;
-  var birthday = req.body.birthday;
+  var nickname = req.body.nickname;
+  var major = req.body.major;
+  var phone = req.body.phone;
 
-  console.log({name, sextype, birthday, phone});
+  console.log({id, name, nickname, phone});
 
-  var sql_count = "select count(*) as cnt from bestfood_member where phone = ?;";
-  var sql_insert = "insert into bestfood_member (phone, name, sextype, birthday) values(?, ?, ?, ?);";
-  var sql_update = "update bestfood_member set name = ?, sextype = ?, birthday = ? where phone = ?; ";
-  var sql_select = "select seq from bestfood_member where phone = ?; ";
+  var sql_count = "select count(*) as cnt from user where user_id = ?;";
+  var sql_insert = "insert into user (user_id, user_pw, user_name, user_nickname, user_major, user_phone) values(?,?,?, ?, ?, ?);";
+  var sql_update = "update user set user_pw = ?, user_nickname = ?, user_major = ?, user_phone = ? where user_id = ?; ";
+  var sql_select = "select user_name from user where user_id = ?; ";
 
-  // 서버에서 전화번호를 검색해서
-  db.get().query(sql_count, phone, function (err, rows) {
+  // 서버에서 학번을 검색해서
+  db.get().query(sql_count, id, function (err, rows) {
     // 값이 있는 경우
     if (rows[0].cnt > 0) {
       console.log("sql_update : " + sql_update);
       // 업데이트
-      db.get().query(sql_update, [name, sextype, birthday, phone], function (err, result) {
+      db.get().query(sql_update, [pw, nickname, major, phone, id], function (err, result) {
         if (err) return res.sendStatus(400);
         console.log(result);
         // 업데이트 된 값의 seq를 띄워준다
-        db.get().query(sql_select, phone, function (err, rows) {
+        db.get().query(sql_select, id, function (err, rows) {
           if (err) return res.sendStatus(400);
 
           res.status(200).send("" + rows[0].seq);
@@ -98,7 +101,7 @@ router.post('/info', function(req, res) {
     } else {
       console.log("sql_insert : " + sql_insert);
       // 값을 저장
-      db.get().query(sql_insert, [phone, name, sextype, birthday], function (err, result) {
+      db.get().query(sql_insert, [id, pw, name, nickname, major, phone], function (err, result) {
         if (err) return res.sendStatus(400);
 
         res.status(200).send('' + result.insertId);

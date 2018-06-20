@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.maedin.findkhu.fragment.CenterInfo;
@@ -23,10 +25,13 @@ import com.example.maedin.findkhu.fragment.MyPage;
 import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.fragment.NoticeView;
 import com.example.maedin.findkhu.fragment.SearchInput;
+import com.example.maedin.findkhu.fragment.SignIn;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
+
+    private boolean loginCheck = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //drawerLayout 지정
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+
+
+//        if (!loginCheck)
+//            btn_loginout.setText("LOGIN");
+//        else
+//            btn_loginout.setText("LOGOUT");
+
 
         //NavigationView 지정, 클릭시 setNavigationItemSelected로 이동
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -141,4 +154,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

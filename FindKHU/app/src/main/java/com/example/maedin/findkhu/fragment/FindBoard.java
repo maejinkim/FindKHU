@@ -127,7 +127,6 @@ public class FindBoard extends Fragment implements OnMapReadyCallback,  View.OnC
                 Activity root = getActivity();
                 Toast.makeText(root, "클릭", Toast.LENGTH_LONG).show();
 
-
                 fragment.getView().setVisibility(View.VISIBLE);
                 listView.setVisibility(View.INVISIBLE);
                 break;
