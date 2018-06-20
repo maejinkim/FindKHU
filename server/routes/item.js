@@ -74,14 +74,15 @@ router.post('/info', function(request, response, next) {
     var item_title = request.body.item_title;
     var item_content = request.body.item_content;
     var item_reg_date = request.body.item_reg_date;
-    var item_date = request.body.item_date;
+    var item_date = new Date();
     var cat_id = request.body.cat_id;
     var loc_id = request.body.loc_id;
+    var pic_id = request.body.pic_id;
 
     var sql_insert =
-    "insert into item (item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id)"
+    "insert into item (item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id, pic_id)"
     + " values(?,?,?,?,?,?,?,?); ";
-    var value = [item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id];
+    var value = [item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id, pic_id];
     console.log("sql_insert : "+sql_insert);
 
     db.get().query(sql_insert, value, function(err, result){
@@ -104,7 +105,7 @@ router.post('/info/image', function (req, res) {
       var sql_insert = "insert into picture (item_type, item_id, pic_name) values (?, ?, ?);";
 
       db.get().query(sql_insert, [fields.item_type,  fields.item_id, files.file.name], function (err, rows) {
-        res.sendStatus(200);
+          response.status(200).send(''+result.insertId);
       });
     });
   });

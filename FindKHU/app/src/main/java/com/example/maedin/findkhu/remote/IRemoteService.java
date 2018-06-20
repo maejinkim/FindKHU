@@ -139,7 +139,7 @@ public interface IRemoteService {
     @POST("/item/info/image")
     Call<ResponseBody> uploadFoodImage(
             @Part("item_type") RequestBody infoType,
-            @Part("item_id") RequestBody itemId,
+            @Part("item_id") RequestBody userid,
             @Part MultipartBody.Part file
     );
 
