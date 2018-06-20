@@ -1,10 +1,6 @@
 package com.example.maedin.findkhu.remote;
 
-import com.example.maedin.findkhu.item.CatItem;
-import com.example.maedin.findkhu.item.InfoItem;
-import com.example.maedin.findkhu.item.KeepItem;
-import com.example.maedin.findkhu.item.LoginItem;
-import com.example.maedin.findkhu.item.MemberInfoItem;
+import com.example.maedin.findkhu.item.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +126,10 @@ public interface IRemoteService {
     @POST("/item/info")
     Call<ResponseBody> insertFoodInto(@Body InfoItem _InfoItem);
 
+    //item location 추가, return loc_id
+    @POST("/item/loc")
+    Call<ResponseBody> insertFoodInto(@Body LocItem locItem);
+
 
     /**
      * BestFoodRegisterImageFragment
@@ -138,8 +138,8 @@ public interface IRemoteService {
     @Multipart
     @POST("/item/info/image")
     Call<ResponseBody> uploadFoodImage(
-            @Part("info_seq") RequestBody infoSeq,
-            @Part("image_memo") RequestBody imageMemo,
+            @Part("item_type") RequestBody infoType,
+            @Part("item_id") RequestBody userid,
             @Part MultipartBody.Part file
     );
 
