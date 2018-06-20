@@ -1,6 +1,6 @@
 package com.example.maedin.findkhu.activity;
 
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_main, new Home())
                 .commit();
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         item.setChecked(true);
 
-       FragmentManager manager = getFragmentManager();
+       FragmentManager manager = getSupportFragmentManager();
 
         switch (item.getItemId()) {
             case R.id.navigation_item_lost:

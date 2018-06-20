@@ -55,14 +55,14 @@
         <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/lost_list_view">
+            android:id="@+id/find_list_view">
         </ListView>
 
         <fragment
-            android:id="@+id/lost_map"
+            android:id="@+id/find_map"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            class="com.google.android.gms.maps.MapView"/>
+            android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
     </FrameLayout>
 
