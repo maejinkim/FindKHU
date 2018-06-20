@@ -24,8 +24,8 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 
         btn_signup = (Button) findViewById(R.id.sign_button);
         btn_signup.setOnClickListener(this);
-        btn_signup = (Button) findViewById(R.id.sign_button);
-        btn_signup.setOnClickListener(this);
+        btn_signin = (Button) findViewById(R.id.sign_button);
+        btn_signin.setOnClickListener(this);
 
 
     }
