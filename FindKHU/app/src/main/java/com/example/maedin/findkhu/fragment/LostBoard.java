@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
+import com.example.maedin.findkhu.activity.MainActivity;
 import com.example.maedin.findkhu.adapter.ListViewAdapter;
 import com.example.maedin.findkhu.list.ListVO;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -41,6 +42,8 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
     Button btn_map;
     Button btn_list;
 
+    Button btn_post;
+
 
     @Nullable
     @Override
@@ -53,6 +56,7 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
         listView = (ListView) view.findViewById(R.id.lost_list_view);
         btn_map = (Button) view.findViewById(R.id.btn_view_lost_map);
         btn_list = (Button) view.findViewById(R.id.btn_view_lost_board);
+        btn_post = (Button) view.findViewById(R.id.btn_lost_post);
 
         listView.setVisibility(View.INVISIBLE);
 
@@ -63,6 +67,7 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
 
         btn_map.setOnClickListener(this);
         btn_list.setOnClickListener(this);
+        btn_post.setOnClickListener(this);
 
         return view;
     }
@@ -130,6 +135,11 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
 
                 fragment.getView().setVisibility(View.VISIBLE);
                 listView.setVisibility(View.INVISIBLE);
+                break;
+            }
+            case R.id.btn_lost_post:
+            {
+                ((MainActivity)getActivity()).replaceLostPost();
                 break;
             }
 

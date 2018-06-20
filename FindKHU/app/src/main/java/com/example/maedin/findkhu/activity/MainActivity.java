@@ -22,6 +22,7 @@ import com.example.maedin.findkhu.fragment.CompleteBoard;
 import com.example.maedin.findkhu.fragment.FindBoard;
 import com.example.maedin.findkhu.fragment.Home;
 import com.example.maedin.findkhu.fragment.LostBoard;
+import com.example.maedin.findkhu.fragment.LostPost;
 import com.example.maedin.findkhu.fragment.MyPage;
 import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.fragment.NoticeView;
@@ -169,6 +170,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ViewDetail detail = new ViewDetail();
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.content_main, detail).commit();
+    }
+
+    public void replaceLostPost()
+    {
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.content_main, new LostPost()).commit();
     }
 
 

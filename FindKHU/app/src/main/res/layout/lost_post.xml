@@ -28,6 +28,7 @@
 
         <EditText
             android:width="200dp"
+            
             />
 
         <TextView
