@@ -86,7 +86,7 @@ public interface IRemoteService {
      */
     // 서버에서 번호로 계정 찾기
     @GET("/member/{id}")
-    Call<MemberInfoItem> selectMemberInfo(@Path("id") String phone);
+    Call<MemberInfoItem> selectMemberInfo(@Path("id") String id);
 
 
 //    // 서버에 번호로 계정 등록

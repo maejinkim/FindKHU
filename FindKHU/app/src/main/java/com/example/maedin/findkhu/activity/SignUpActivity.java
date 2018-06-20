@@ -84,12 +84,12 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
      */
     private MemberInfoItem getMemberInfoItem() {
         MemberInfoItem item = new MemberInfoItem();
-        item.name = edit_name.getText().toString();
-        item.id = edit_id.getText().toString();
-        item.pw = edit_pw.getText().toString();
-        item.phone = edit_phone.getText().toString();
-        item.nickname = edit_nick.getText().toString();
-        item.major = edit_major.getText().toString();
+        item.user_name = edit_name.getText().toString();
+        item.user_id = edit_id.getText().toString();
+        item.user_pw = edit_pw.getText().toString();
+        item.user_phone = edit_phone.getText().toString();
+        item.user_nickname = edit_nick.getText().toString();
+        item.user_major = edit_major.getText().toString();
         ;
         return item;
     }
@@ -101,7 +101,7 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
      * @return 입력하지 않았다면 true, 입력했다면 false
      */
     private boolean isNoName(MemberInfoItem newItem) {
-        if (StringLib.getInstance().isBlank(newItem.name)) {
+        if (StringLib.getInstance().isBlank(newItem.user_name)) {
             return true;
         } else {
             return false;

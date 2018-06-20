@@ -52,51 +52,73 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     }
 
 
-    /**
-     * 사용자 계정 확인2. 가져온 정보 서버에서 확인
-     */
-    private void CheckLoginInfo(final LoginItem loginItem){
+//    /**
+//     * 사용자 계정 확인2. 가져온 정보 서버에서 확인
+//     */
+//    private void CheckLoginInfo(final LoginItem loginItem){
+//
+//
+//        // 결국 Retrofit 생성 -> GET 요청으로 데이터 불러오기 -> 성공 여부에 따라 다음으로 넘어갈지 결정
+//        IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
+//
+//        Call<ResponseBody> call = remoteService.loginCheck(loginItem);
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                Log.e("[index화면] 3.1 계정 불러오기", "성공");
+//                //MemberInfoItem item = response.body();
+//
+//                //response 성공 및 패스워드 일치
+//                if(response.isSuccessful()){
+//
+//                    IRemoteService remoteService2 = ServiceGenerator.createService(IRemoteService.class);
+//                    Call<MemberInfoItem> call2 = remoteService2.selectMemberInfo(loginItem.id);
+//
+//                    call2.enqueue(new Callback<MemberInfoItem>() {
+//                        @Override
+//                        public void onResponse(Call<MemberInfoItem> _call, Response<MemberInfoItem> _response) {
+//                            Log.e("[login화면] 계정 불러오기", "성공");
+//                            MemberInfoItem item = _response.body();
+//                            ((MyApp) getApplicationContext()).setMemberInfoItem(item);
+//                            startMain();
+//                        }
+//                        @Override
+//                        public void onFailure(Call<MemberInfoItem> _call, Throwable _t) {
+//                            Log.e("[login화면] 계정 불러오기", "서버 통신에 실패");
+//                            Toast.makeText(SignInActivity.this, "서버 통신에 실패했습니다", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//
+//                }else{
+//                    Toast.makeText(SignInActivity.this, "로그인 실패!", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                Log.e("[index화면] 3. 계정 불러오기", "서버 통신에 실패");
+//                Toast.makeText(SignInActivity.this, "서버 통신에 실패했습니다.", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
 
 
-        // 결국 Retrofit 생성 -> GET 요청으로 데이터 불러오기 -> 성공 여부에 따라 다음으로 넘어갈지 결정
+    private void CheckLoginInfo(final LoginItem loginItem) {
+
         IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
+        Call<MemberInfoItem> call = remoteService.selectMemberInfo(loginItem.id);
 
-        Call<ResponseBody> call = remoteService.loginCheck(loginItem);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<MemberInfoItem>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.e("[index화면] 3.1 계정 불러오기", "성공");
-                //MemberInfoItem item = response.body();
-
-                //response 성공 및 패스워드 일치
-                if(response.isSuccessful()){
-
-                    IRemoteService remoteService2 = ServiceGenerator.createService(IRemoteService.class);
-                    Call<MemberInfoItem> call2 = remoteService2.selectMemberInfo(loginItem.id);
-
-                    call2.enqueue(new Callback<MemberInfoItem>() {
-                        @Override
-                        public void onResponse(Call<MemberInfoItem> _call, Response<MemberInfoItem> _response) {
-                            Log.e("[login화면] 계정 불러오기", "성공");
-                            MemberInfoItem item = _response.body();
-                            ((MyApp) getApplicationContext()).setMemberInfoItem(item);
-                            startMain();
-                        }
-                        @Override
-                        public void onFailure(Call<MemberInfoItem> _call, Throwable _t) {
-                            Log.e("[login화면] 계정 불러오기", "서버 통신에 실패");
-                            Toast.makeText(SignInActivity.this, "서버 통신에 실패했습니다", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                }else{
-                    Toast.makeText(SignInActivity.this, "로그인 실패!", Toast.LENGTH_SHORT).show();
-                }
+            public void onResponse(Call<MemberInfoItem> call, Response<MemberInfoItem> response) {
+                Log.e("[login화면] 계정 불러오기", "성공");
+                MemberInfoItem item = response.body();
+                ((MyApp) getApplicationContext()).setMemberInfoItem(item);
+                startMain();
             }
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.e("[index화면] 3. 계정 불러오기", "서버 통신에 실패");
-                Toast.makeText(SignInActivity.this, "서버 통신에 실패했습니다.", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<MemberInfoItem> _call, Throwable _t) {
+                Log.e("[login화면] 계정 불러오기", "서버 통신에 실패");
+                Toast.makeText(SignInActivity.this, "서버 통신에 실패했습니다", Toast.LENGTH_SHORT).show();
             }
         });
     }
