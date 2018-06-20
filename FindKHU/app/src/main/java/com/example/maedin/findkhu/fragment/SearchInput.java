@@ -9,12 +9,9 @@ import android.view.ViewGroup;
 
 import com.example.maedin.findkhu.R;
 
+public class SearchInput extends Fragment {
 
-public class MyPage extends Fragment {
+    View view;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.mypage, container, false);
-    }
+
 }
