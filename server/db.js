@@ -1,20 +1,35 @@
 const mysql = require('mysql');
 const db_config = require('./config/db-config.json');
+//
+// let db;
+// function connectDB() {
+//     if (!db) {
+//         db = mysql.createConnection(db_config);
+//         db.connect(function(err) {
+//             if (!err) {
+//                 console.log('Database is connected');
+//             } else {
+//                 console.log('Error: ', err);
+//             }
+//         });
+//     }
+//
+//     return db;
+// }
+// 
+// module.exports = connectDB();
 
-let db;
-function connectDB() {
-    if (!db) {
-        db = mysql.createConnection(db_config);
-        db.connect(function(err) {
-            if (!err) {
-                console.log('Database is connected');
-            } else {
-                console.log('Error: ', err);
-            }
-        });
-    }
 
-    return db;
+exports.connect = function(done) {
+    pool = mysql.createPool({
+        connectionLimit: 100,
+        host     : 'localhost',
+        user     : 'root',
+        password : 'autoset',
+        database : 'findkhu'
+    });
 }
 
-module.exports = connectDB();
+exports.get = function() {
+  return pool;
+}

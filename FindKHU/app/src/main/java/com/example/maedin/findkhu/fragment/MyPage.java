@@ -3,7 +3,6 @@ package com.example.maedin.findkhu.fragment;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ public class MyPage extends Fragment implements View.OnClickListener {
     Button btn_completed_post;
     Button btn_and_more;
 
-    FragmentManager manager = getFragmentManager();
 
     @Nullable
     @Override
