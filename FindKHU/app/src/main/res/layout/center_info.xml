@@ -5,117 +5,78 @@
     android:orientation="vertical"
     android:background="#ffffff">
 
-
     <TextView
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:text="분실물 문의"
-        android:textSize="40dp"
+        android:textSize="35dp"
         android:layout_marginBottom="30dp"/>
 
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:columnCount="2"
-        android:layout_marginLeft="20dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="셔틀버스"
-            android:textSize="30dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"/>
+        <Button
+            android:id="@+id/btn_call_bus"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="17dp"
             android:text="031 - 201 - 2915"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:onClick="openDial1"/>
+        <Button
+            android:id="@+id/btn_call_bus2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="17dp"
             android:text="010 - 6724 - 6221"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_column="1"
-            android:layout_row="1"
-            android:gravity="center_vertical"/>
-
-    </GridLayout>
-
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:columnCount="2"
-        android:layout_marginLeft="20dp">
+            android:onClick="openDial1"/>
 
         <TextView
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="대원"
-            android:textSize="30dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"/>
+        <Button
+            android:id="@+id/btn_call_daewon"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="17dp"
             android:text="031 - 204 - 6657"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
+            android:onClick="openDial2"/>
+        <Button
+            android:id="@+id/btn_call_daewon2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1112, M5107, 5500-1"
-            android:textSize="13dp"
-         />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="17dp"
             android:text="031 - 206 - 1570"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_column="1"
-            android:layout_row="1"
-            android:gravity="center_vertical"/>
-
-    </GridLayout>
-
-    <GridLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:columnCount="2"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp">
+            android:onClick="openDial2"/>
 
         <TextView
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:text="용남"
-            android:textSize="30dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="031 - 281 - 7105"
-            android:textSize="20dp"
-            android:layout_marginLeft="20dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="9, 7000, 5100"
-            android:textSize="13dp"
-            />
+            android:layout_gravity="center"
+            android:textSize="20dp"/>
+        <Button
+        android:id="@+id/btn_call_yongnam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="17dp"
+        android:text="031 - 281 - 7105"
+        android:onClick="openDial3"/>
 
 
-
-    </GridLayout>
+        ></LinearLayout>
 
 </LinearLayout>
