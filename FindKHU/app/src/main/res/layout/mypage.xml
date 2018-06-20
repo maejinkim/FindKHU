@@ -54,7 +54,7 @@
             android:textSize="15dp"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
-
+            android:id="@+id/edit_my_info"
             android:text="정보수정"/>
 
     </LinearLayout>
