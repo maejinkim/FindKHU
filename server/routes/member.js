@@ -90,7 +90,7 @@ router.post('/info', function(req, res) {
       db.get().query(sql_update, [pw, nickname, major, phone, id], function (err, result) {
         if (err) return res.sendStatus(400);
         console.log(result);
-        // 업데이트 된 값의 seq를 띄워준다
+        // 업데이트 된 값의 name를 띄워준다
         db.get().query(sql_select, id, function (err, rows) {
           if (err) return res.sendStatus(400);
 
