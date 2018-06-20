@@ -8,9 +8,10 @@ var router = express.Router();
 router.get('/:id', function(req, res, next) {
   // express 모듈을 사용하면 /:를 통해서 클라이언트에서 주소를 통해 요청한 값을 params로 가져올 수 있다
   var id = req.params.id;
+  var pw = req.params.pw;
 
   // 요청한 번호로 서버에서 select한다.
-  var sql = "select * from user where user_id = ?;";
+  var sql = "select * from user where user_id = ? ;";
   console.log("sql : " + sql);
 
 	db.get().query(sql, id, function (err, rows) {
@@ -27,39 +28,62 @@ router.get('/:id', function(req, res, next) {
   });
 });
 
-//member/phone
-router.post('/phone', function(req, res) {
-  // 레트로핏에서 @Field에 값을 담아서 보냈기 때문에 request의 body에서 꺼내 사용하는 것.
-  // 필드는 키값의 형태로 가져오는 것이기 때문에 req와 같은 다른 값은 가져올 수 없다.
-  var phone = req.body.phone;
-  var sql_count = "select count(*) as cnt from bestfood_member where phone = ?;";
-  var sql_insert = "insert into bestfood_member (phone) values(?);";
+router.post('/id', function(req, res, next) {
+  // express 모듈을 사용하면 /:를 통해서 클라이언트에서 주소를 통해 요청한 값을 params로 가져올 수 있다
+  var id = req.body.id;
+  var pw = sha256(req.body.pw);
 
-  console.log("sql_count : " + sql_count);
-  console.log("다른 값 : "+req.body.seq);
-  console.log("phone : "+phone);
+  // 요청한 번호로 서버에서 select한다.
+  var sql = "select * from user where user_id = ? ;";
+  console.log("sql : " + sql);
 
-  // 전화번호를 쿼리해서
-  db.get().query(sql_count, phone, function (err, rows) {
-    console.log(rows);
-    console.log(rows[0].cnt);
-
-    // 이미 값이 있으면 response에 오류를 리턴
-    if (rows[0].cnt > 0) {
-      console.log("이미 가입되었습니다");
-      return res.sendStatus(400);
-    }
-
-    // 값이 없으면 서버에 저장하고 resultId값을 리턴
-    db.get().query(sql_insert, phone, function (err, result) {
-      if (err) {
-        return res.sendStatus(400);
+	db.get().query(sql, id, function (err, rows) {
+      console.log("rows : " + JSON.stringify(rows));
+      // console.log("row.length : " + rows.length);
+      // 서버에 값이 있다면 response로 성공을 보내고
+      if (rows.length > 0) {
+        res.status(200).json(rows[0]);
+      // 값이 없으면 response에 오류를 보낸다. 참고로 이는 클라이언트에서 값을 따로 처리하기 위해
+      // response에 값을 지정해 준 것이다.
+      } else {
+        res.sendStatus(400);
       }
-      console.log("result : "+result.insertId);
-      res.send('' + result.insertId);
-    });
   });
 });
+//
+// //member/phone
+// router.post('/phone', function(req, res) {
+//   // 레트로핏에서 @Field에 값을 담아서 보냈기 때문에 request의 body에서 꺼내 사용하는 것.
+//   // 필드는 키값의 형태로 가져오는 것이기 때문에 req와 같은 다른 값은 가져올 수 없다.
+//   var phone = req.body.phone;
+//   var sql_count = "select count(*) as cnt from bestfood_member where phone = ?;";
+//   var sql_insert = "insert into bestfood_member (phone) values(?);";
+//
+//   console.log("sql_count : " + sql_count);
+//   console.log("다른 값 : "+req.body.seq);
+//   console.log("phone : "+phone);
+//
+//   // 전화번호를 쿼리해서
+//   db.get().query(sql_count, phone, function (err, rows) {
+//     console.log(rows);
+//     console.log(rows[0].cnt);
+//
+//     // 이미 값이 있으면 response에 오류를 리턴
+//     if (rows[0].cnt > 0) {
+//       console.log("이미 가입되었습니다");
+//       return res.sendStatus(400);
+//     }
+//
+//     // 값이 없으면 서버에 저장하고 resultId값을 리턴
+//     db.get().query(sql_insert, phone, function (err, result) {
+//       if (err) {
+//         return res.sendStatus(400);
+//       }
+//       console.log("result : "+result.insertId);
+//       res.send('' + result.insertId);
+//     });
+//   });
+// });
 
 //member/info
 router.post('/info', function(req, res) {
@@ -83,7 +107,7 @@ router.post('/info', function(req, res) {
 
   // 서버에서 학번을 검색해서
   db.get().query(sql_count, id, function (err, rows) {
-    console.log("db connect 확인");
+    // console.log("db connect 확인");
     // 값이 있는 경우
     if (rows[0].cnt > 0) {
       console.log("sql_update : " + sql_update);
