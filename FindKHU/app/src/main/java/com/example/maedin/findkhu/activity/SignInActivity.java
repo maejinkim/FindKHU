@@ -18,6 +18,7 @@ import com.example.maedin.findkhu.lib.StringLib;
 import com.example.maedin.findkhu.remote.IRemoteService;
 import com.example.maedin.findkhu.remote.ServiceGenerator;
 
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,6 +71,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
                 //response 성공 및 패스워드 일치
                 if(response.isSuccessful()){
 
+                    ((MyApp) getApplicationContext()).setMemberInfoItem(item);
                     startMain();
 
                 }else{
@@ -77,7 +79,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
                 }
             }
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(Call<MemberInfoItem> call, Throwable t) {
                 Log.e("[index화면] 3. 계정 불러오기", "서버 통신에 실패");
                 Toast.makeText(SignInActivity.this, "서버 통신에 실패했습니다.", Toast.LENGTH_SHORT).show();
             }
