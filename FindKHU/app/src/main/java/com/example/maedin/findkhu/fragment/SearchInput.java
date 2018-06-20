@@ -13,5 +13,11 @@ public class SearchInput extends Fragment {
 
     View view;
 
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
+        view = inflater.inflate(R.layout.search_input, container, false);
+        return view;
+    }
 }

@@ -21,6 +21,8 @@ import com.example.maedin.findkhu.fragment.Home;
 import com.example.maedin.findkhu.fragment.LostBoard;
 import com.example.maedin.findkhu.fragment.MyPage;
 import com.example.maedin.findkhu.R;
+import com.example.maedin.findkhu.fragment.NoticeView;
+import com.example.maedin.findkhu.fragment.SearchInput;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -103,11 +105,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.navigation_notice:
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                manager.beginTransaction().replace(R.id.content_main, new NoticeView()).commit();
                 break;
 
             case R.id.navigation_search:
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                manager.beginTransaction().replace(R.id.content_main, new SearchInput()).commit();
                 break;
         }
 
