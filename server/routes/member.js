@@ -74,7 +74,7 @@ router.post('/info', function(req, res) {
   var major = req.body.major;
   var phone = req.body.phone;
 
-  console.log({id, name, nickname, phone});
+  console.log({id,pw , name, nickname, major, phone});
 
   var sql_count = "select count(*) as cnt from user where user_id = ?;";
   var sql_insert = "insert into user (user_id, user_pw, user_name, user_nickname, user_major, user_phone) values(?,?,?, ?, ?, ?);";
@@ -90,7 +90,7 @@ router.post('/info', function(req, res) {
       db.get().query(sql_update, [pw, nickname, major, phone, id], function (err, result) {
         if (err) return res.sendStatus(400);
         console.log(result);
-        // 업데이트 된 값의 seq를 띄워준다
+        // 업데이트 된 값의 name를 띄워준다
         db.get().query(sql_select, id, function (err, rows) {
           if (err) return res.sendStatus(400);
 
@@ -104,7 +104,7 @@ router.post('/info', function(req, res) {
       db.get().query(sql_insert, [id, pw, name, nickname, major, phone], function (err, result) {
         if (err) return res.sendStatus(400);
 
-        res.status(200).send('' + result.insertId);
+        res.status(200).send('' + result.user_id);
       });
     }
   });
