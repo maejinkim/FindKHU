@@ -8,20 +8,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class ImageItem {
 
-    @SerializedName("seq") public int seq;
-    @SerializedName("info_seq") public int infoSeq;
-    @SerializedName("file_name") public String fileName;
-    @SerializedName("image_memo") public String imageMemo;
-    @SerializedName("reg_date") public String regDate;
+    @SerializedName("pic_id") public int pic_id;
+    @SerializedName("item_type") public int item_type;
+    @SerializedName("item_id") public String item_id;
+    @SerializedName("pic_name") public String pic_name;
 
     @Override
     public String toString() {
         return "ImageItem{" +
-                "seq=" + seq +
-                ", infoSeq=" + infoSeq +
-                ", fileName='" + fileName + '\'' +
-                ", imageMemo='" + imageMemo + '\'' +
-                ", regDate='" + regDate + '\'' +
+                "pic_id=" + pic_id +
+                ", item_type=" + item_type +
+                ", item_id='" + item_id + '\'' +
+                ", pic_name='" + pic_name + '\''+
                 '}';
     }
 }
