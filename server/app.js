@@ -6,9 +6,9 @@ const bodyParser = require('body-parser');
 var logger = require('morgan');
 const db = require('./db.js');
 
-//
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+
+var member = require('./routes/member');
+var item = require('./routes/item');
 
 var app = express();
 
@@ -23,8 +23,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/member', member);
+app.use('/item', item);
 
 const router = require('./routes/router.js')(app);
 
