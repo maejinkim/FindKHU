@@ -18,6 +18,9 @@ import android.widget.SpinnerAdapter;
 import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
+import com.example.maedin.findkhu.activity.MainActivity;
+import com.example.maedin.findkhu.activity.MyApp;
+import com.example.maedin.findkhu.item.MemberInfoItem;
 
 public class LostPost extends Fragment implements View.OnClickListener{
 
@@ -40,6 +43,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view =  inflater.inflate(R.layout.lost_post, container, false);
+
 
         btn_post = (Button) view.findViewById(R.id.btn_lost_post_ok);
         btn_pic = (Button) view.findViewById(R.id.btn_lost_pic);
@@ -69,13 +73,21 @@ public class LostPost extends Fragment implements View.OnClickListener{
 
 
 
+
+
         return view;
     }
 
     @Override
     public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.btn_lost_select_map:
 
+                ((MyApp)getActivity().getApplication()).setPostSelect(1);
+                ((MainActivity)getActivity()).replaceFragment(new MapSelect());
 
+        }
 
     }
 }

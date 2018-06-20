@@ -15,6 +15,9 @@ import com.example.maedin.findkhu.item.MemberInfoItem;
 public class MyApp extends Application {
 
     private MemberInfoItem memberInfoItem;
+    private int loc_id;
+    private int pic_id;
+    private int postSelect;
 //    private FoodInfoItem foodInfoItem;
 
     @Override
@@ -43,7 +46,32 @@ public class MyApp extends Application {
     public String getMemberID() {
         return memberInfoItem.user_id;
     }
-//
+
+    public int getLoc_id() {
+        return loc_id;
+    }
+
+    public void setLoc_id(int loc_id) {
+        this.loc_id = loc_id;
+    }
+
+    public int getPic_id() {
+        return pic_id;
+    }
+
+    public void setPic_id(int pic_id) {
+        this.pic_id = pic_id;
+    }
+
+    public int getPostSelect() {
+        return postSelect;
+    }
+
+    public void setPostSelect(int postSelect) {
+        this.postSelect = postSelect;
+    }
+
+    //
 //    public FoodInfoItem getFoodInfoItem() {
 //        return foodInfoItem;
 //    }
