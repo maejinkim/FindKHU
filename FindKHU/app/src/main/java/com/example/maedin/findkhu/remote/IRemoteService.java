@@ -1,8 +1,8 @@
 package com.example.maedin.findkhu.remote;
 
-import com.example.administrator.bestfood.item.FoodInfoItem;
-import com.example.administrator.bestfood.item.KeepItem;
-import com.example.administrator.bestfood.item.MemberInfoItem;
+import com.example.maedin.findkhu.item.InfoItem;
+import com.example.maedin.findkhu.item.KeepItem;
+import com.example.maedin.findkhu.item.MemberInfoItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +73,7 @@ public interface IRemoteService {
     // 검색은 @Query 로 한다고 생각하자
 
 
-    String BASE_URL = "http://192.168.1.68:3000";
+    String BASE_URL = "http://192.168.1.23:8000";
     String MEMBER_ICON_URL = BASE_URL+"/member/";
     String IMAGE_URL = BASE_URL+"/img/";
 //==================================================================================================
@@ -84,14 +84,14 @@ public interface IRemoteService {
      * IndexActivity
      */
     // 서버에서 번호로 계정 찾기
-    @GET("/member/{phone}")
-    Call<MemberInfoItem> selectMemberInfo(@Path("phone") String phone);
+    @GET("/member/{id}")
+    Call<MemberInfoItem> selectMemberInfo(@Path("id") String phone);
 
 
     // 서버에 번호로 계정 등록
     @FormUrlEncoded
-    @POST("/member/phone")
-    Call<ResponseBody> insertMemberPhone(@Field("phone") String phone);
+    @POST("/member/id")
+    Call<ResponseBody> insertMemberPhone(@Field("id") String phone);
 
 
     /**
@@ -119,7 +119,7 @@ public interface IRemoteService {
      */
     // 서버에 맛집 정보 업로드
     @POST("/food/info")
-    Call<ResponseBody> insertFoodInto(@Body FoodInfoItem foodInfoItem);
+    Call<ResponseBody> insertFoodInto(@Body InfoItem foodInfoItem);
 
 
     /**
@@ -140,7 +140,7 @@ public interface IRemoteService {
      */
     // 맛집 정보
     @GET("/food/list")
-    Call<List<FoodInfoItem>> listFoodInfo(@Query("member_seq") int memberSeq,
+    Call<List<InfoItem>> listFoodInfo(@Query("member_seq") int memberSeq,
                                           @Query("user_latitude") double userLatitude,
                                           @Query("user_longitude") double userLongitude,
                                           @Query("order_type") String orderType,
@@ -152,7 +152,7 @@ public interface IRemoteService {
      */
     // 맛집 정보
     @GET("/food/list/{info_seq}")
-    Call<FoodInfoItem> selectFoodInfo(@Path("info_seq") int infoSeq, @Query("member_seq") int memberSeq);
+    Call<InfoItem> selectFoodInfo(@Path("info_seq") int infoSeq, @Query("member_seq") int memberSeq);
 
 //==================================================================================================
 //    지도 정보
@@ -163,7 +163,7 @@ public interface IRemoteService {
      */
     // 지도 프래그먼트 필요한 정보
     @GET("/map/list")
-    Call<List<FoodInfoItem>> listMap(@Query("member_seq") int memberSeq,
+    Call<List<InfoItem>> listMap(@Query("member_seq") int memberSeq,
                                      @Query("latitude") double latitude,
                                      @Query("longitude") double longitude,
                                      @Query("distance") int distance,
