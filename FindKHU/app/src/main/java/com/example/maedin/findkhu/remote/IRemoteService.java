@@ -1,5 +1,6 @@
 package com.example.maedin.findkhu.remote;
 
+import com.example.maedin.findkhu.item.CatItem;
 import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.item.KeepItem;
 import com.example.maedin.findkhu.item.LoginItem;
@@ -142,6 +143,9 @@ public interface IRemoteService {
             @Part MultipartBody.Part file
     );
 
+    // 서버에서 catgory 가져오기
+    @GET("/item/cat")
+    Call<List<CatItem>> getCatItem();
 
     /**
      * BestFoodListFragment
