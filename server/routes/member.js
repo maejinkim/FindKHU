@@ -44,7 +44,7 @@ router.post('/id', function(req, res, next) {
       if (rows.length > 0) {
         if(rows[0].user_pw == pw)
         {
-            res.status(200).json(rows[0]);
+            res.sendstatus(200);
         }
       else{
           console.log("비밀번호틀림");
