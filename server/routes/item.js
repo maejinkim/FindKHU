@@ -32,8 +32,9 @@ router.post('/loc', function(req, res) {
 
   var sql_insert = "insert into location (loc_address, loc_lat, loc_lng) values (?, ?, ?);";
   //var sql_get = "select *  from location order by loc_id desc limit 1;"
+  console.log(sql_insert);
 
-  db.get().query(sql_insert,[address, lat, lng], function (err, result) {
+  db.get().query(sql_insert, function (err, result) {
       // if (err) return res.sendStatus(400);
       //
       // db.get().query(sql_get, function (err, result) {
