@@ -1,6 +1,7 @@
 package com.example.maedin.findkhu.fragment;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,9 +13,11 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
@@ -24,14 +27,15 @@ import com.example.maedin.findkhu.item.MemberInfoItem;
 
 public class LostPost extends Fragment implements View.OnClickListener{
 
-
+    int mYear, mMonth, mDay;
     View view;
     Button btn_post;
     Button btn_pic;
     Button btn_map;
+    Button btn_date;
     EditText edit_title;
     EditText edit_contents;
-    EditText edit_date;
+    TextView edit_date;
     Spinner category;
 
 
@@ -50,12 +54,13 @@ public class LostPost extends Fragment implements View.OnClickListener{
         btn_map = (Button) view.findViewById(R.id.btn_lost_select_map);
         edit_title = (EditText) view.findViewById(R.id.edit_lost_title);
         edit_contents = (EditText) view.findViewById(R.id.edit_lost_contents);
-        edit_date = (EditText) view.findViewById(R.id.edit_lost_date);
+        edit_date = (TextView) view.findViewById(R.id.edit_lost_date);
+        btn_date = (Button) view.findViewById(R.id.btn_select_date);
 
         btn_post.setOnClickListener(this);
         btn_map.setOnClickListener(this);
         btn_pic.setOnClickListener(this);
-
+        btn_date.setOnClickListener(this);
 
         final Activity root = getActivity();
         category = (Spinner) view.findViewById(R.id.spinner_category); //butterknife 없을경우
@@ -87,8 +92,42 @@ public class LostPost extends Fragment implements View.OnClickListener{
                 ((MyApp)getActivity().getApplication()).setPostSelect(1);
                 ((MyApp)getActivity().getApplication()).setLostPost(this);
                 ((MainActivity)getActivity()).replaceFragment(new MapSelect());
-
+            break;
+            case R.id.btn_select_date:
+                new DatePickerDialog(this.getActivity(), mDateSetListener, mYear, mMonth, mDay).show();
+                break;
         }
 
     }
+
+    DatePickerDialog.OnDateSetListener mDateSetListener =
+
+            new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+
+                    mYear = year;
+
+                    mMonth = monthOfYear;
+
+                    mDay = dayOfMonth;
+
+                    //텍스트뷰의 값을 업데이트함
+
+            UpdateNow();
+
+                }
+
+            };
+
+    void UpdateNow(){
+        edit_date.setText(String.format("%d년 %d월 %d일", mYear, mMonth+1, mDay));
+    }
+
+
+
+
 }

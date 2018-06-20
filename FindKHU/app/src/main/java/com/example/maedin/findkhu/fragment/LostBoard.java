@@ -44,7 +44,6 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
 
     Button btn_post;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
