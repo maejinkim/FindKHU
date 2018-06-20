@@ -95,7 +95,7 @@ public class RemoteLib {
      * @param file 파일 객체
      * @param handler 처리 결과를 응답할 핸들러
      */
-    public String uploadItemImage(int item_id, int item_type, File file, final Handler handler) {
+    public String uploadItemImage(String item_id, int item_type, File file, final Handler handler) {
         final String[] pic_id = {null};
         IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
 

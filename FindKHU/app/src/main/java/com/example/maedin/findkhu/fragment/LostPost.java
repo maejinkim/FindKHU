@@ -79,6 +79,9 @@ public class LostPost extends Fragment implements View.OnClickListener{
     String imageFilename;
     boolean isSavingImage = false;
 
+    int cat_id;
+    String date = "";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -92,8 +95,10 @@ public class LostPost extends Fragment implements View.OnClickListener{
         edit_title = (EditText) view.findViewById(R.id.edit_lost_title);
         edit_contents = (EditText) view.findViewById(R.id.edit_lost_contents);
         edit_date = (TextView) view.findViewById(R.id.edit_lost_date);
+        edit_date.setText(date);
         btn_date = (Button) view.findViewById(R.id.btn_select_date);
-        image = (ImageView) view.findViewById(R.id.image_pic);
+        image = (ImageView) view.findViewById(R.id.img_pic);
+
 
         btn_post.setOnClickListener(this);
         btn_map.setOnClickListener(this);
@@ -105,14 +110,17 @@ public class LostPost extends Fragment implements View.OnClickListener{
         sAdapter = ArrayAdapter.createFromResource(root, R.array.category, android.R.layout.simple_spinner_dropdown_item);
 
         category.setAdapter(sAdapter);
-//        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            public void onItemSelected(AdapterView<!--?-->  parent, View view, int position, long id) {
-//
-//                Toast.makeText(root,
-//                        sAdapter.getItem(position), Toast.LENGTH_SHORT).show();
-//            }
-//
-//        });
+        category.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                cat_id = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                cat_id = 0;
+            }
+        });
 
         return view;
     }
@@ -150,6 +158,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.btn_lost_post_ok:
+                postUpload();
 
                 break;
         }
@@ -281,6 +290,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
 
     void UpdateNow(){
         edit_date.setText(String.format("%d년 %d월 %d일", mYear, mMonth+1, mDay));
+        date = edit_date.getText().toString();
     }
 
     /**
@@ -297,23 +307,28 @@ public class LostPost extends Fragment implements View.OnClickListener{
 
         setImageItem();
 
-        ((MyApp)getActivity().getApplication()).setPic_id(Integer.parseInt(RemoteLib.getInstance().uploaItemImage(imageItem.item_id,
+        ((MyApp)getActivity().getApplication()).setPic_id(Integer.parseInt(RemoteLib.getInstance().uploadItemImage(imageItem.item_id,
                 imageItem.item_type, imageFile, finishHandler)));
         isSavingImage = false;
     }
 
-    private void PostUpload()
+    private void postUpload()
     {
 
         InfoItem infoItem = new InfoItem();
         infoItem.item_type = ((MyApp)getActivity().getApplication()).getPostSelect();
-        infoItem.
-
+        infoItem.cat_id = cat_id;
+        infoItem.user_id = ((MyApp)getActivity().getApplication()).getMemberID();
+        infoItem.item_title = edit_title.getText().toString();
+        infoItem.item_content = edit_contents.getText().toString();
+        infoItem.item_reg_date = edit_date.getText().toString();
+        infoItem.loc_id = ((MyApp)getActivity().getApplication()).getLoc_id();
+        infoItem.pic_id = ((MyApp)getActivity().getApplication()).getPic_id();
 
 
         // 변경 사항 있을 경우
         IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
-        Call<ResponseBody> call = remoteService.insertLocInfo(locItem);
+        Call<ResponseBody> call = remoteService.insertItemInfo(infoItem);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -325,9 +340,9 @@ public class LostPost extends Fragment implements View.OnClickListener{
                         e.printStackTrace();
                     }
                     Log.e("Response 리턴값", loc_id);
-                    Log.e("marker 등록", "성공");
+                    Log.e("포스트 등록", "성공");
 
-                    ((MyApp)getActivity().getApplication()).setLoc_id(Integer.parseInt(loc_id));
+
                     if (((MyApp)getActivity().getApplication()).getPostSelect() == 1)
                     {
                         ((MainActivity)getActivity()).replaceFragment(new LostBoard());
@@ -339,7 +354,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
 
 
                 } else {
-                    Log.e("marker 등록", "오류");
+                    Log.e("포스트 등록", "오류");
 
                 }
             }

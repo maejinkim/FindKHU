@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.activity.MainActivity;
+import com.example.maedin.findkhu.activity.MyApp;
 import com.example.maedin.findkhu.adapter.ListViewAdapter;
 import com.example.maedin.findkhu.list.ListVO;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -138,6 +139,7 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
             }
             case R.id.btn_lost_post:
             {
+                ((MyApp)getActivity().getApplication()).setPostSelect(1);
                 ((MainActivity)getActivity()).replaceFragment(new LostPost());
                 break;
             }

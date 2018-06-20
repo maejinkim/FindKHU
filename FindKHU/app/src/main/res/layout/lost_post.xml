@@ -87,7 +87,11 @@
             android:id="@+id/edit_lost_contents"/>
 
 
-        <TextView
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/img_pic"
             android:text="사진없음"
             android:layout_gravity="center"
             android:textSize="5pt" />

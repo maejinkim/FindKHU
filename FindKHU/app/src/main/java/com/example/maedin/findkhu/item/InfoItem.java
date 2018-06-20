@@ -25,6 +25,11 @@ public class InfoItem implements Parcelable{
     public int loc_id;
     public int pic_id;
 
+    public InfoItem()
+    {
+
+    }
+
     public  InfoItem(Parcel in){
         item_type=in.readInt();
         item_id=in.readInt();
