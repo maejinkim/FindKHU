@@ -18,12 +18,13 @@ router.get('/cat', function(req, res, next) {
         res.status(200).json(rows);
     });
 });
+
 // itme/info
 router.post('/info', function(request, response, next) {
-    if(!request.body.member_seq){
+    if(!request.body.user_id){
         return response.status(400).send("정보가 없습니다");
     }
-    console.log("현재 상황");
+    console.log("물품 등록");
     var seq = request.body.seq;
     var member_seq = request.body.member_seq;
     var name = request.body.name;
