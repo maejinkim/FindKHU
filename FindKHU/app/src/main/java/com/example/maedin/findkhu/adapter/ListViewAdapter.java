@@ -9,6 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
+import com.example.maedin.findkhu.activity.MainActivity;
+import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.list.ListVO;
 
 import java.util.ArrayList;
@@ -64,6 +66,8 @@ public class ListViewAdapter extends BaseAdapter {
         {
             @Override
             public void onClick(View v) {
+                InfoItem item = null;
+                ((MainActivity)v.getContext()).replaceDetail(item);
                 Toast.makeText(context, (pos+1) + "번째 리스트가 클릭되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
