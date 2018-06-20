@@ -125,9 +125,9 @@ public interface IRemoteService {
     /**
      * BestFoodRegisterInputFragment
      */
-    // 서버에 맛집 정보 업로드
-    @POST("/food/info")
-    Call<ResponseBody> insertFoodInto(@Body InfoItem foodInfoItem);
+    // 서버 게시글 등록
+    @POST("/item/info")
+    Call<ResponseBody> insertFoodInto(@Body InfoItem _InfoItem);
 
 
     /**
@@ -135,7 +135,7 @@ public interface IRemoteService {
      */
     // 맛집 이미지 업로드
     @Multipart
-    @POST("/food/info/image")
+    @POST("/item/info/image")
     Call<ResponseBody> uploadFoodImage(
             @Part("info_seq") RequestBody infoSeq,
             @Part("image_memo") RequestBody imageMemo,
@@ -147,7 +147,7 @@ public interface IRemoteService {
      * BestFoodListFragment
      */
     // 맛집 정보
-    @GET("/food/list")
+    @GET("/item/list")
     Call<List<InfoItem>> listFoodInfo(@Query("member_seq") int memberSeq,
                                           @Query("user_latitude") double userLatitude,
                                           @Query("user_longitude") double userLongitude,

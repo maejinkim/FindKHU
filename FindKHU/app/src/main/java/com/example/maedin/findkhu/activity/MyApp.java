@@ -39,6 +39,10 @@ public class MyApp extends Application {
     public String getMemberName() {
         return memberInfoItem.name;
     }
+
+    public String getMemberID() {
+        return memberInfoItem.id;
+    }
 //
 //    public FoodInfoItem getFoodInfoItem() {
 //        return foodInfoItem;
