@@ -15,11 +15,11 @@ router.get('/:id', function(req, res, next) {
 
 	db.get().query(sql, id, function (err, rows) {
       console.log("rows : " + JSON.stringify(rows));
-      console.log("test : " + rows);
-      // console.log("row.length : " + rows.length);
+      console.log("row.length : " + rows.length);
       // 서버에 값이 있다면 response로 성공을 보내고
       if (rows.length > 0) {
-        res.status(200).json(rows[0]);
+      //  res.status(200).send(JSON.stringify(rows));
+         res.status(200).json(rows[0]);
       // 값이 없으면 response에 오류를 보낸다. 참고로 이는 클라이언트에서 값을 따로 처리하기 위해
       // response에 값을 지정해 준 것이다.
       } else {
@@ -44,7 +44,7 @@ router.post('/id', function(req, res, next) {
       if (rows.length > 0) {
         if(rows[0].user_pw == pw)
         {
-            res.sendstatus(200);
+            res.sendStatus(200);
         }
       else{
           console.log("비밀번호틀림");
