@@ -83,6 +83,7 @@ router.post('/info', function(req, res) {
 
   // 서버에서 학번을 검색해서
   db.get().query(sql_count, id, function (err, rows) {
+    console.log("db connect 확인");
     // 값이 있는 경우
     if (rows[0].cnt > 0) {
       console.log("sql_update : " + sql_update);

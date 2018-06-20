@@ -16,18 +16,12 @@ const db_config = require('./config/db-config.json');
 //
 //     return db;
 // }
-// 
+//
 // module.exports = connectDB();
 
 
 exports.connect = function(done) {
-    pool = mysql.createPool({
-        connectionLimit: 100,
-        host     : 'localhost',
-        user     : 'root',
-        password : 'autoset',
-        database : 'findkhu'
-    });
+    pool = mysql.createPool(db_config);
 }
 
 exports.get = function() {
