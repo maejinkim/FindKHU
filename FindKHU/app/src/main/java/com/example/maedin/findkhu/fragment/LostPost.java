@@ -2,10 +2,20 @@ package com.example.maedin.findkhu.fragment;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -23,9 +34,20 @@ import android.widget.Toast;
 import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.activity.MainActivity;
 import com.example.maedin.findkhu.activity.MyApp;
+import com.example.maedin.findkhu.item.ImageItem;
 import com.example.maedin.findkhu.item.MemberInfoItem;
+import com.example.maedin.findkhu.lib.BitmapLib;
+import com.example.maedin.findkhu.lib.FileLib;
+import com.example.maedin.findkhu.remote.IRemoteService;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.File;
 
 public class LostPost extends Fragment implements View.OnClickListener{
+
+    private static final int PICK_FROM_CAMERA = 0;
+    private static final int PICK_FROM_ALBUM = 1;
 
     int mYear, mMonth, mDay;
     View view;
@@ -37,17 +59,22 @@ public class LostPost extends Fragment implements View.OnClickListener{
     EditText edit_contents;
     TextView edit_date;
     Spinner category;
+    ImageView image;
 
-
+    Activity context;
     SpinnerAdapter sAdapter;
 
+    File imageFile;
+    ImageItem imageItem;
+    String imageFilename;
+    boolean isSavingImage = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         view =  inflater.inflate(R.layout.lost_post, container, false);
-
+        context = this.getActivity();
 
         btn_post = (Button) view.findViewById(R.id.btn_lost_post_ok);
         btn_pic = (Button) view.findViewById(R.id.btn_lost_pic);
@@ -56,6 +83,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
         edit_contents = (EditText) view.findViewById(R.id.edit_lost_contents);
         edit_date = (TextView) view.findViewById(R.id.edit_lost_date);
         btn_date = (Button) view.findViewById(R.id.btn_select_date);
+        image = (ImageView) view.findViewById(R.id.image_pic);
 
         btn_post.setOnClickListener(this);
         btn_map.setOnClickListener(this);
@@ -76,11 +104,18 @@ public class LostPost extends Fragment implements View.OnClickListener{
 //
 //        });
 
-
-
-
-
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        imageItem = new ImageItem();
+        imageItem.infoSeq = infoSeq;
+
+        //imageFilename = infoSeq + "_" + String.valueOf(System.currentTimeMillis());
+        imageFile = FileLib.getInstance().getImageFile(context, imageFilename);
     }
 
     @Override
@@ -96,9 +131,113 @@ public class LostPost extends Fragment implements View.OnClickListener{
             case R.id.btn_select_date:
                 new DatePickerDialog(this.getActivity(), mDateSetListener, mYear, mMonth, mDay).show();
                 break;
+
+            case R.id.btn_lost_pic:
+                showImageDialog(context);
+                break;
         }
 
     }
+
+    /**
+     * 이미지를 어떤 방식으로 선택할지에 대해 다이얼로그를 보여준다.
+     * @param context 컨텍스트 객체
+     */
+    public void showImageDialog(Context context) {
+        new AlertDialog.Builder(context)
+                .setTitle("이미지 등록")
+                .setSingleChoiceItems(R.array.camera_album_category, -1,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which == 0) {
+                                    getImageFromCamera();
+                                } else {
+                                    getImageFromAlbum();
+                                }
+
+                                dialog.dismiss();
+                            }
+                        }).show();
+    }
+
+    private void getImageFromCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile));
+        context.startActivityForResult(intent, PICK_FROM_CAMERA);
+    }
+
+    /**
+     * 앨범으로부터 이미지를 선택할 수 있는 액티비티를 시작한다.
+     */
+    private void getImageFromAlbum() {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+        context.startActivityForResult(intent, PICK_FROM_ALBUM);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_FROM_CAMERA) {
+                Picasso.with(context).load(imageFile).into(image);
+
+            } else if (requestCode == PICK_FROM_ALBUM && data != null) {
+                Uri dataUri = data.getData();
+
+                if (dataUri != null) {
+                    Picasso.with(context).load(dataUri).into(image);
+
+                    Picasso.with(context).load(dataUri).into(new Target() {
+                        @Override
+                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                            BitmapLib.getInstance().saveBitmapToFileThread(imageUploadHandler,
+                                    imageFile, bitmap);
+                            isSavingImage = true;
+                        }
+
+                        @Override
+                        public void onBitmapFailed(Drawable errorDrawable) {
+                        }
+
+                        @Override
+                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+    /**
+     * 사용자가 선택한 이미지와 입력한 메모를 ImageItem 객체에 저장한다.
+     */
+    private  void setImageItem() {
+        imageItem.fileName = imageFilename + ".png";
+    }
+
+    Handler imageUploadHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            isSavingImage = false;
+            setImageItem();
+            Picasso.with(context).invalidate(IRemoteService.IMAGE_URL + imageItem.fileName);
+        }
+    };
+
+    Handler finishHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+
+            context.finish();
+        }
+    };
+
 
     DatePickerDialog.OnDateSetListener mDateSetListener =
 
