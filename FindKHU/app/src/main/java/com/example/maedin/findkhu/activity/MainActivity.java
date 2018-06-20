@@ -1,6 +1,6 @@
 package com.example.maedin.findkhu.activity;
 
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -21,6 +21,8 @@ import com.example.maedin.findkhu.fragment.Home;
 import com.example.maedin.findkhu.fragment.LostBoard;
 import com.example.maedin.findkhu.fragment.MyPage;
 import com.example.maedin.findkhu.R;
+import com.example.maedin.findkhu.fragment.NoticeView;
+import com.example.maedin.findkhu.fragment.SearchInput;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -53,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_main, new Home())
                 .commit();
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         item.setChecked(true);
 
-       FragmentManager manager = getFragmentManager();
+       FragmentManager manager = getSupportFragmentManager();
 
         switch (item.getItemId()) {
             case R.id.navigation_item_lost:
@@ -103,11 +105,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.navigation_notice:
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                manager.beginTransaction().replace(R.id.content_main, new NoticeView()).commit();
                 break;
 
             case R.id.navigation_search:
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_LONG).show();
+                manager.beginTransaction().replace(R.id.content_main, new SearchInput()).commit();
                 break;
         }
 
