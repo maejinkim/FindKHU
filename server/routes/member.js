@@ -42,7 +42,15 @@ router.post('/id', function(req, res, next) {
       // console.log("row.length : " + rows.length);
       // 서버에 값이 있다면 response로 성공을 보내고
       if (rows.length > 0) {
-        res.status(200).json(rows[0]);
+        if(rows[0].user_pw == pw)
+        {
+            res.status(200).json(rows[0]);
+        }
+      else{
+          console.log("비밀번호틀림");
+          res.sendStatus(400);
+
+      }
       // 값이 없으면 response에 오류를 보낸다. 참고로 이는 클라이언트에서 값을 따로 처리하기 위해
       // response에 값을 지정해 준 것이다.
       } else {

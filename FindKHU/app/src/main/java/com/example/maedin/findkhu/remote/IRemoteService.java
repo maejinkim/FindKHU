@@ -98,7 +98,7 @@ public interface IRemoteService {
     /**
      * ProfileActivity
      */
-    // 서버에 사용자 계정 등록
+    // 로그인
     @POST("/member/info")
     Call<ResponseBody> insertMemberInfo(@Body MemberInfoItem memberInfoItem);
 
