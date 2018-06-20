@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.util.SortedList;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +13,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
+import com.example.maedin.findkhu.item.MemberInfoItem;
+import com.example.maedin.findkhu.remote.IRemoteService;
+import com.example.maedin.findkhu.remote.ServiceGenerator;
+import com.google.android.gms.common.api.Response;
 
 public class SignUpActivity extends Activity implements View.OnClickListener{
 
@@ -44,11 +50,11 @@ public class SignUpActivity extends Activity implements View.OnClickListener{
     /**
      * 사용자 계정 확인2. 가져온 정보 서버에서 확인
      */
-    private void selectMemberInfoFromServer(String phoneNumber){
+    private void selectMemberInfoFromServer(String id){
         // 결국 Retrofit 생성 -> GET 요청으로 데이터 불러오기 -> 성공 여부에 따라 다음으로 넘어갈지 결정
         IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
-        Call<MemberInfoItem> call = remoteService.selectMemberInfo(phoneNumber);
-        call.enqueue(new Callback<MemberInfoItem>() {
+        Call<MemberInfoItem> call = remoteService.selectMemberInfo(id);
+        call.enqueue(new SortedList.Callback<MemberInfoItem>() {
             @Override
             public void onResponse(Call<MemberInfoItem> call, Response<MemberInfoItem> response) {
                 Log.e("[index화면] 3.1 계정 불러오기", "성공");
