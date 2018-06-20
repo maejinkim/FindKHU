@@ -64,9 +64,9 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
      * 로그인 액티비티로 넘어감
      */
     private void returnLogin() {
-        Intent intent = new Intent(this, SignInActivity.class);
-        startActivity(intent);
-        Log.e("[signup 화면] 회원가입 완료 ", "로그인 화면으로 넘어감");
+//        Intent intent = new Intent(this, SignInActivity.class);
+//        startActivity(intent);
+//        Log.e("[signup 화면] 회원가입 완료 ", "로그인 화면으로 넘어감");
         finish();
     }
 

@@ -98,16 +98,16 @@ public interface IRemoteService {
     /**
      * ProfileActivity
      */
-    // 로그인
+    // 회원가입
     @POST("/member/info")
     Call<ResponseBody> insertMemberInfo(@Body MemberInfoItem memberInfoItem);
 
     /**
      * ProfileActivity
      */
-    // 서버에 사용자 계정 등록
+    // 로그인
     @POST("/member/id")
-    Call<MemberInfoItem> loginCheck(@Body LoginItem loginItem);
+    Call<ResponseBody> loginCheck(@Body LoginItem loginItem);
 
 
     /**

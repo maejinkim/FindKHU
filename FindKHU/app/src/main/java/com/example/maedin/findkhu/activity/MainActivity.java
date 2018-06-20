@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        user_name = (TextView) findViewById(R.id.txt_userName);
-        memberInfoItem = ((MyApp)getApplication()).getMemberInfoItem();
+        //user_name = (TextView) findViewById(R.id.txt_userName);
+        //memberInfoItem = ((MyApp)getApplication()).getMemberInfoItem();
 
-        user_name.setText(memberInfoItem.name + " 님");
+        //user_name.setText(memberInfoItem.name + " 님");
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); //activity actionbar로 대체

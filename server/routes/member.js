@@ -31,7 +31,7 @@ router.post('/id', function(req, res, next) {
   // express 모듈을 사용하면 /:를 통해서 클라이언트에서 주소를 통해 요청한 값을 params로 가져올 수 있다
   var id = req.body.id;
   var pw = sha256(req.body.pw);
-
+    console.log(id +"rr" +pw);
   // 요청한 번호로 서버에서 select한다.
   var sql = "select * from user where user_id = ? ;";
   console.log("sql : " + sql);
