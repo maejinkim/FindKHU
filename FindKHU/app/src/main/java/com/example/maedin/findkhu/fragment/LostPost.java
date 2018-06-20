@@ -85,6 +85,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
             case R.id.btn_lost_select_map:
 
                 ((MyApp)getActivity().getApplication()).setPostSelect(1);
+                ((MyApp)getActivity().getApplication()).setLostPost(this);
                 ((MainActivity)getActivity()).replaceFragment(new MapSelect());
 
         }

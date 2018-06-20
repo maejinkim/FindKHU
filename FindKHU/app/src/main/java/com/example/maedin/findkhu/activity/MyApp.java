@@ -3,6 +3,7 @@ package com.example.maedin.findkhu.activity;
 import android.app.Application;
 import android.os.StrictMode;
 
+import com.example.maedin.findkhu.fragment.LostPost;
 import com.example.maedin.findkhu.item.MemberInfoItem;
 
 /**
@@ -18,6 +19,7 @@ public class MyApp extends Application {
     private int loc_id;
     private int pic_id;
     private int postSelect;
+    private LostPost lostPost;
 //    private FoodInfoItem foodInfoItem;
 
     @Override
@@ -69,6 +71,14 @@ public class MyApp extends Application {
 
     public void setPostSelect(int postSelect) {
         this.postSelect = postSelect;
+    }
+
+    public LostPost getLostPost() {
+        return lostPost;
+    }
+
+    public void setLostPost(LostPost lostPost) {
+        this.lostPost = lostPost;
     }
 
     //

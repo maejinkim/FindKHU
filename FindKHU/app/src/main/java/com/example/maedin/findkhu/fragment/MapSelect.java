@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
+import com.example.maedin.findkhu.activity.MainActivity;
+import com.example.maedin.findkhu.activity.MyApp;
 import com.example.maedin.findkhu.activity.SignUpActivity;
 import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.item.LocItem;
@@ -173,8 +175,14 @@ public class MapSelect extends Fragment implements OnMapReadyCallback, GoogleMap
                         e.printStackTrace();
                     }
                     Log.e("Response 리턴값", loc_id);
-//
                     Log.e("marker 등록", "성공");
+
+                    ((MyApp)getActivity().getApplication()).setLoc_id(Integer.parseInt(loc_id));
+                    if (((MyApp)getActivity().getApplication()).getPostSelect() == 1)
+                    {
+                        ((MainActivity)getActivity()).replaceFragment(((MyApp)getActivity().getApplication()).getLostPost());
+
+                    }
 
 
                 } else {
