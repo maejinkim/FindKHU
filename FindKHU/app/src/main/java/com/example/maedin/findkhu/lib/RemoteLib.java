@@ -11,6 +11,7 @@ import com.example.maedin.findkhu.remote.IRemoteService;
 import com.example.maedin.findkhu.remote.ServiceGenerator;
 
 import java.io.File;
+import java.io.IOException;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -89,12 +90,12 @@ public class RemoteLib {
 
     /**
      * 맛집 이미지를 서버에 업로드한다.
-     * @param infoSeq 맛집 정보 일련번호
-     * @param imageMemo 이미지 설명
+     * @param item_id 맛집 정보 일련번호
+     * @param item_type 이미지 설명
      * @param file 파일 객체
      * @param handler 처리 결과를 응답할 핸들러
      */
-    public void uploadFoodImage(int infoSeq, String imageMemo, File file, final Handler handler) {
+    public String uploadItemImage(int item_id, int item_type, File file, final Handler handler) {
         IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
 
         RequestBody requestFile =
@@ -103,20 +104,26 @@ public class RemoteLib {
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        RequestBody infoSeqBody =
+        RequestBody ItemIdBody =
                 RequestBody.create(
-                        MediaType.parse("multipart/form-data"), "" + infoSeq);
-        RequestBody imageMemoBody =
+                        MediaType.parse("multipart/form-data"), "" + item_id);
+        RequestBody ItemTypeBody =
                 RequestBody.create(
-                        MediaType.parse("multipart/form-data"), imageMemo);
+                        MediaType.parse("multipart/form-data"), "" + item_type);
 
         Call<ResponseBody> call =
-                remoteService.uploadFoodImage(infoSeqBody, imageMemoBody, body);
+                remoteService.uploadFoodImage(ItemIdBody, ItemTypeBody, body);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call,
                                    Response<ResponseBody> response) {
                 handler.sendEmptyMessage(0);
+                try {
+                    return response.body().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return e.toString();
+                }
             }
 
             @Override
