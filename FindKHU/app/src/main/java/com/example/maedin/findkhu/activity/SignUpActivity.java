@@ -14,6 +14,8 @@ import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.item.MemberInfoItem;
 import com.example.maedin.findkhu.remote.IRemoteService;
 import com.example.maedin.findkhu.remote.ServiceGenerator;
+import com.example.maedin.findkhu.lib.RemoteLib;
+import com.example.maedin.findkhu.lib.StringLib;
 
 
 import okhttp3.ResponseBody;
@@ -127,7 +129,6 @@ public class SignUpActivity extends Activity implements View.OnClickListener{
      * 계정이 없는 경우 새로 서버에 등록한다.
      */
     private void insertMemberInfo(){
-        String phoneNumber = EtcLib.getInstance().getPhoeNumber(this);
 
         final IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
 
