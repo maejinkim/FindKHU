@@ -139,7 +139,7 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
             }
             case R.id.btn_lost_post:
             {
-                ((MainActivity)getActivity()).replaceLostPost();
+                ((MainActivity)getActivity()).replaceFragment(new LostPost());
                 break;
             }
 

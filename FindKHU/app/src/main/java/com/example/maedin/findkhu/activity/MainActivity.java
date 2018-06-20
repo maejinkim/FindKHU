@@ -1,5 +1,6 @@
 package com.example.maedin.findkhu.activity;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -172,10 +173,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         manager.beginTransaction().replace(R.id.content_main, detail).commit();
     }
 
-    public void replaceLostPost()
+    public void replaceFragment(Fragment fragment)
     {
         FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.content_main, new LostPost()).commit();
+        manager.beginTransaction().replace(R.id.content_main, fragment).commit();
     }
 
 
