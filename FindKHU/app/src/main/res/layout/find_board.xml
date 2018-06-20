@@ -50,8 +50,20 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#a3a3a3"
-        android:id="@+id/find_map_layout">
+        android:background="#a3a3a3">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/lost_list_view">
+        </ListView>
+
+        <fragment
+            android:id="@+id/lost_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            class="com.google.android.gms.maps.MapView"/>
+
     </FrameLayout>
 
 </LinearLayout>
