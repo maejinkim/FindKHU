@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MemberInfoItem memberInfoItem;
     TextView user_name;
 
+    View hview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
@@ -43,10 +45,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //user_name = (TextView) findViewById(R.id.txt_userName);
-        //memberInfoItem = ((MyApp)getApplication()).getMemberInfoItem();
 
-        //user_name.setText(memberInfoItem.name + " 님");
+        memberInfoItem = ((MyApp)getApplication()).getMemberInfoItem();
+
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar); //activity actionbar로 대체
@@ -64,6 +66,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //NavigationView 지정, 클릭시 setNavigationItemSelected로 이동
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        hview = navigationView.getHeaderView(0);
+        user_name = (TextView) hview.findViewById(R.id.txt_userName);
+        user_name.setText(memberInfoItem.name + " 님");
+
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);

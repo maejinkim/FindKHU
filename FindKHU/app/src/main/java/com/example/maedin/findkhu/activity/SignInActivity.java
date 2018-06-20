@@ -55,7 +55,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     /**
      * 사용자 계정 확인2. 가져온 정보 서버에서 확인
      */
-    private void CheckLoginInfo(LoginItem loginItem){
+    private void CheckLoginInfo(final LoginItem loginItem){
 
 
         // 결국 Retrofit 생성 -> GET 요청으로 데이터 불러오기 -> 성공 여부에 따라 다음으로 넘어갈지 결정
@@ -71,8 +71,23 @@ public class SignInActivity extends Activity implements View.OnClickListener {
                 //response 성공 및 패스워드 일치
                 if(response.isSuccessful()){
 
-                    //((MyApp) getApplicationContext()).setMemberInfoItem(item);
-                    startMain();
+                    IRemoteService remoteService2 = ServiceGenerator.createService(IRemoteService.class);
+                    Call<MemberInfoItem> call2 = remoteService2.selectMemberInfo(loginItem.id);
+
+                    call2.enqueue(new Callback<MemberInfoItem>() {
+                        @Override
+                        public void onResponse(Call<MemberInfoItem> _call, Response<MemberInfoItem> _response) {
+                            Log.e("[login화면] 계정 불러오기", "성공");
+                            MemberInfoItem item = _response.body();
+                            ((MyApp) getApplicationContext()).setMemberInfoItem(item);
+                            startMain();
+                        }
+                        @Override
+                        public void onFailure(Call<MemberInfoItem> _call, Throwable _t) {
+                            Log.e("[login화면] 계정 불러오기", "서버 통신에 실패");
+                            Toast.makeText(SignInActivity.this, "서버 통신에 실패했습니다", Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
                 }else{
                     Toast.makeText(SignInActivity.this, "로그인 실패!", Toast.LENGTH_SHORT).show();
