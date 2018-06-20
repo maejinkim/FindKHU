@@ -27,6 +27,8 @@ import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.fragment.NoticeView;
 import com.example.maedin.findkhu.fragment.SearchInput;
 import com.example.maedin.findkhu.fragment.SignIn;
+import com.example.maedin.findkhu.fragment.ViewDetail;
+import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.item.MemberInfoItem;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
@@ -162,6 +164,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
+    public void replaceDetail(InfoItem item)
+    {
+        ViewDetail detail = new ViewDetail();
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.content_main, detail).commit();
+    }
 
 
 }
