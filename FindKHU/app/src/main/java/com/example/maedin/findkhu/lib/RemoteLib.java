@@ -96,6 +96,7 @@ public class RemoteLib {
      * @param handler 처리 결과를 응답할 핸들러
      */
     public String uploadItemImage(int item_id, int item_type, File file, final Handler handler) {
+        final String[] pic_id = {null};
         IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
 
         RequestBody requestFile =
@@ -119,10 +120,9 @@ public class RemoteLib {
                                    Response<ResponseBody> response) {
                 handler.sendEmptyMessage(0);
                 try {
-                    return response.body().string();
+                    pic_id[0] = response.body().string();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    return e.toString();
                 }
             }
 
@@ -130,6 +130,7 @@ public class RemoteLib {
             public void onFailure(Call<ResponseBody> call, Throwable t) {
             }
         });
+        return pic_id[0];
     }
 
 
