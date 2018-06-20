@@ -73,7 +73,7 @@ public interface IRemoteService {
     // 검색은 @Query 로 한다고 생각하자
 
 
-    String BASE_URL = "http://192.168.1.23:8000";
+    String BASE_URL = "http://192.168.1.66:8000";
     String MEMBER_ICON_URL = BASE_URL+"/member/";
     String IMAGE_URL = BASE_URL+"/img/";
 //==================================================================================================
