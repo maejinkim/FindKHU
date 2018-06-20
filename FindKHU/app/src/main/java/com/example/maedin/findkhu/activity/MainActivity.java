@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         hview = navigationView.getHeaderView(0);
         user_name = (TextView) hview.findViewById(R.id.txt_userName);
-        user_name.setText(memberInfoItem.name + " 님");
+        user_name.setText(memberInfoItem.user_name + " 님");
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
