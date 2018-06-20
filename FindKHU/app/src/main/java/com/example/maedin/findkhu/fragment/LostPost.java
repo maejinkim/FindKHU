@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,14 +36,23 @@ import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.activity.MainActivity;
 import com.example.maedin.findkhu.activity.MyApp;
 import com.example.maedin.findkhu.item.ImageItem;
+import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.item.MemberInfoItem;
 import com.example.maedin.findkhu.lib.BitmapLib;
 import com.example.maedin.findkhu.lib.FileLib;
+import com.example.maedin.findkhu.lib.RemoteLib;
 import com.example.maedin.findkhu.remote.IRemoteService;
+import com.example.maedin.findkhu.remote.ServiceGenerator;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.io.File;
+import java.io.IOException;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LostPost extends Fragment implements View.OnClickListener{
 
@@ -112,7 +122,8 @@ public class LostPost extends Fragment implements View.OnClickListener{
         super.onViewCreated(view, savedInstanceState);
 
         imageItem = new ImageItem();
-        imageItem.infoSeq = infoSeq;
+        imageItem.item_id = ((MyApp)getActivity().getApplication()).getMemberID();
+        imageItem.item_type = ((MyApp)getActivity().getApplication()).getPostSelect();
 
         //imageFilename = infoSeq + "_" + String.valueOf(System.currentTimeMillis());
         imageFile = FileLib.getInstance().getImageFile(context, imageFilename);
@@ -124,7 +135,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
         {
             case R.id.btn_lost_select_map:
 
-                ((MyApp)getActivity().getApplication()).setPostSelect(1);
+                //((MyApp)getActivity().getApplication()).setPostSelect(1); -> 글쓰기 눌렀을때 설정할것.
                 ((MyApp)getActivity().getApplication()).setLostPost(this);
                 ((MainActivity)getActivity()).replaceFragment(new MapSelect());
             break;
@@ -134,6 +145,12 @@ public class LostPost extends Fragment implements View.OnClickListener{
 
             case R.id.btn_lost_pic:
                 showImageDialog(context);
+                saveImage();
+
+                break;
+
+            case R.id.btn_lost_post_ok:
+
                 break;
         }
 
@@ -216,7 +233,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
      * 사용자가 선택한 이미지와 입력한 메모를 ImageItem 객체에 저장한다.
      */
     private  void setImageItem() {
-        imageItem.fileName = imageFilename + ".png";
+        imageItem.pic_name = imageFilename + ".png";
     }
 
     Handler imageUploadHandler = new Handler() {
@@ -225,7 +242,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
             super.handleMessage(msg);
             isSavingImage = false;
             setImageItem();
-            Picasso.with(context).invalidate(IRemoteService.IMAGE_URL + imageItem.fileName);
+            Picasso.with(context).invalidate(IRemoteService.IMAGE_URL + imageItem.pic_name);
         }
     };
 
@@ -266,7 +283,72 @@ public class LostPost extends Fragment implements View.OnClickListener{
         edit_date.setText(String.format("%d년 %d월 %d일", mYear, mMonth+1, mDay));
     }
 
+    /**
+     * 이미지를 서버에 업로드한다.
+     */
+    private void saveImage() {
+        if (isSavingImage) {
+            return;
+        }
+
+        if (imageFile.length() == 0) {
+            return;
+        }
+
+        setImageItem();
+
+        ((MyApp)getActivity().getApplication()).setPic_id(Integer.parseInt(RemoteLib.getInstance().uploaItemImage(imageItem.item_id,
+                imageItem.item_type, imageFile, finishHandler)));
+        isSavingImage = false;
+    }
+
+    private void PostUpload()
+    {
+
+        InfoItem infoItem = new InfoItem();
+        infoItem.item_type = ((MyApp)getActivity().getApplication()).getPostSelect();
+        infoItem.
 
 
+
+        // 변경 사항 있을 경우
+        IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
+        Call<ResponseBody> call = remoteService.insertLocInfo(locItem);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    String loc_id = null;
+                    try {
+                        loc_id = response.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Log.e("Response 리턴값", loc_id);
+                    Log.e("marker 등록", "성공");
+
+                    ((MyApp)getActivity().getApplication()).setLoc_id(Integer.parseInt(loc_id));
+                    if (((MyApp)getActivity().getApplication()).getPostSelect() == 1)
+                    {
+                        ((MainActivity)getActivity()).replaceFragment(new LostBoard());
+                    }
+                    else
+                    {
+                        ((MainActivity)getActivity()).replaceFragment(new FindBoard());
+                    }
+
+
+                } else {
+                    Log.e("marker 등록", "오류");
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.e("marker 등록", "서버 연결 실패");
+            }
+        });
+    }
 
 }
