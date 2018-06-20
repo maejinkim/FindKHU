@@ -124,11 +124,11 @@ public interface IRemoteService {
      */
     // 서버 게시글 등록
     @POST("/item/info")
-    Call<ResponseBody> insertFoodInto(@Body InfoItem _InfoItem);
+    Call<ResponseBody> insertItemInfo(@Body InfoItem _InfoItem);
 
     //item location 추가, return loc_id
     @POST("/item/loc")
-    Call<ResponseBody> insertFoodInto(@Body LocItem locItem);
+    Call<ResponseBody> insertLocInfo(@Body LocItem locItem);
 
 
     /**

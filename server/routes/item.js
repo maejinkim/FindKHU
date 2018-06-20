@@ -23,16 +23,16 @@ router.get('/cat', function(req, res, next) {
 //item/loc
 router.post('/loc', function(req, res) {
 
-  var name = req.body.loc_name;
   var address = req.body.loc_address;
   var lat = req.body.loc_lat;
   var lng = req.body.loc_lng;
-  var type = req.body.loc_type;
 
-  console.log({name,address , lat, lng, type});
 
-  var sql_insert = "insert into location (loc_name, loc_address, loc_lat, loc_lng, loc_type) values(?,?,?, ?, ?);";
-  var sql_get = "select *  from location order by loc_id desc limit 1;"
+  console.log({address , lat, lng});
+
+  var sql_insert = "insert into location (loc_address, loc_lat, loc_lng) values (?, ?, ?);";
+  //var sql_get = "select *  from location order by loc_id desc limit 1;"
+  console.log(sql_insert);
 
   db.get().query(sql_insert, function (err, result) {
       // if (err) return res.sendStatus(400);
@@ -45,7 +45,7 @@ router.post('/loc', function(req, res) {
       if(err){
           console.log(err);
       }
-      response.status(200).send(''+result.insertId);
+      res.status(200).send(''+result.insertId);
   });
 
 });
