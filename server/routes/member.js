@@ -15,6 +15,7 @@ router.get('/:id', function(req, res, next) {
 
 	db.get().query(sql, id, function (err, rows) {
       console.log("rows : " + JSON.stringify(rows));
+      console.log("test : " + rows);
       // console.log("row.length : " + rows.length);
       // 서버에 값이 있다면 response로 성공을 보내고
       if (rows.length > 0) {
@@ -31,13 +32,13 @@ router.post('/id', function(req, res, next) {
   // express 모듈을 사용하면 /:를 통해서 클라이언트에서 주소를 통해 요청한 값을 params로 가져올 수 있다
   var id = req.body.id;
   var pw = sha256(req.body.pw);
-    console.log(id +"rr" +pw);
+
   // 요청한 번호로 서버에서 select한다.
   var sql = "select * from user where user_id = ? ;";
-  console.log("sql : " + sql);
+  // console.log("sql : " + sql);
 
 	db.get().query(sql, id, function (err, rows) {
-      console.log("rows : " + JSON.stringify(rows));
+      // console.log("rows : " + JSON.stringify(rows));
       // console.log("row.length : " + rows.length);
       // 서버에 값이 있다면 response로 성공을 보내고
       if (rows.length > 0) {
