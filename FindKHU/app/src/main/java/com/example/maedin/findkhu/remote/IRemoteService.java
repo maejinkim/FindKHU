@@ -1,7 +1,9 @@
 package com.example.maedin.findkhu.remote;
 
+import com.example.maedin.findkhu.item.CatItem;
 import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.item.KeepItem;
+import com.example.maedin.findkhu.item.LoginItem;
 import com.example.maedin.findkhu.item.MemberInfoItem;
 
 import java.util.ArrayList;
@@ -73,7 +75,7 @@ public interface IRemoteService {
     // 검색은 @Query 로 한다고 생각하자
 
 
-    String BASE_URL = "http://192.168.1.23:8000";
+    String BASE_URL = "http://192.168.1.66:8000";
     String MEMBER_ICON_URL = BASE_URL+"/member/";
     String IMAGE_URL = BASE_URL+"/img/";
 //==================================================================================================
@@ -85,21 +87,28 @@ public interface IRemoteService {
      */
     // 서버에서 번호로 계정 찾기
     @GET("/member/{id}")
-    Call<MemberInfoItem> selectMemberInfo(@Path("id") String phone);
+    Call<MemberInfoItem> selectMemberInfo(@Path("id") String id);
 
 
-    // 서버에 번호로 계정 등록
-    @FormUrlEncoded
-    @POST("/member/id")
-    Call<ResponseBody> insertMemberPhone(@Field("id") String id);
+//    // 서버에 번호로 계정 등록
+//    @FormUrlEncoded
+//    @POST("/member/id")
+//    Call<ResponseBody> insertMemberPhone(@Field("id") String id);
 
 
     /**
      * ProfileActivity
      */
-    // 서버에 사용자 계정 등록
+    // 회원가입
     @POST("/member/info")
     Call<ResponseBody> insertMemberInfo(@Body MemberInfoItem memberInfoItem);
+
+    /**
+     * ProfileActivity
+     */
+    // 로그인
+    @POST("/member/id")
+    Call<ResponseBody> loginCheck(@Body LoginItem loginItem);
 
 
     /**
@@ -117,9 +126,9 @@ public interface IRemoteService {
     /**
      * BestFoodRegisterInputFragment
      */
-    // 서버에 맛집 정보 업로드
-    @POST("/food/info")
-    Call<ResponseBody> insertFoodInto(@Body InfoItem foodInfoItem);
+    // 서버 게시글 등록
+    @POST("/item/info")
+    Call<ResponseBody> insertFoodInto(@Body InfoItem _InfoItem);
 
 
     /**
@@ -127,19 +136,22 @@ public interface IRemoteService {
      */
     // 맛집 이미지 업로드
     @Multipart
-    @POST("/food/info/image")
+    @POST("/item/info/image")
     Call<ResponseBody> uploadFoodImage(
             @Part("info_seq") RequestBody infoSeq,
             @Part("image_memo") RequestBody imageMemo,
             @Part MultipartBody.Part file
     );
 
+    // 서버에서 catgory 가져오기
+    @GET("/item/cat")
+    Call<List<CatItem>> getCatItem();
 
     /**
      * BestFoodListFragment
      */
     // 맛집 정보
-    @GET("/food/list")
+    @GET("/item/list")
     Call<List<InfoItem>> listFoodInfo(@Query("member_seq") int memberSeq,
                                           @Query("user_latitude") double userLatitude,
                                           @Query("user_longitude") double userLongitude,

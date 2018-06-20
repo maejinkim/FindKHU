@@ -7,7 +7,17 @@ var LOADING_SIZE = 20;
 var DEFAULT_USER_LATITUDE = 37.566229;
 var DEFAULT_USER_LONGITUDE = 126.977689;
 
+//item/cat
+router.get('/cat', function(req, res, next) {
+      var sql = "select * from category;";
 
+    db.get().query(sql, function (err, rows) {
+        if (err) return res.sendStatus(400);
+
+        console.log("rows : " + JSON.stringify(rows));
+        res.status(200).json(rows);
+    });
+});
 // itme/info
 router.post('/info', function(request, response, next) {
     if(!request.body.member_seq){

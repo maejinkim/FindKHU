@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.maedin.findkhu.fragment.CenterInfo;
@@ -26,12 +27,16 @@ import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.fragment.NoticeView;
 import com.example.maedin.findkhu.fragment.SearchInput;
 import com.example.maedin.findkhu.fragment.SignIn;
+import com.example.maedin.findkhu.item.MemberInfoItem;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
 
-    private boolean loginCheck = false;
+    MemberInfoItem memberInfoItem;
+    TextView user_name;
+
+    View hview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        memberInfoItem = ((MyApp)getApplication()).getMemberInfoItem();
 
 
 
@@ -55,15 +63,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
 
-//        if (!loginCheck)
-//            btn_loginout.setText("LOGIN");
-//        else
-//            btn_loginout.setText("LOGOUT");
-
-
         //NavigationView 지정, 클릭시 setNavigationItemSelected로 이동
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        hview = navigationView.getHeaderView(0);
+        user_name = (TextView) hview.findViewById(R.id.txt_userName);
+        user_name.setText(memberInfoItem.user_name + " 님");
+
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
