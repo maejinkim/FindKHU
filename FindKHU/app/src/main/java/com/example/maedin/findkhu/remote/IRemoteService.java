@@ -138,8 +138,8 @@ public interface IRemoteService {
     @Multipart
     @POST("/item/info/image")
     Call<ResponseBody> uploadFoodImage(
-            @Part("info_seq") RequestBody infoSeq,
-            @Part("image_memo") RequestBody imageMemo,
+            @Part("item_type") RequestBody infoType,
+            @Part("item_id") RequestBody itemId,
             @Part MultipartBody.Part file
     );
 

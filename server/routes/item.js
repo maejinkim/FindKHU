@@ -22,11 +22,7 @@ router.get('/cat', function(req, res, next) {
 
 //item/loc
 router.post('/loc', function(req, res) {
-  // 레트로핏에서 @Body로 객체를 보내줬고, 확실하지는 않지만
-  // 컨버터팩토리를 사용했기 때문에 분리되어서 꺼낼 수 있는 듯 하다
-  // 그런게 아니라 노드 서버에서 body-parser 모듈을 사용했기 때문에 json으로 전달되는 데이터가
-  // 분리되어 들어오는 것이다.
-  // var id = req.body.loc_id;
+
   var name = req.body.loc_name;
   var address = req.body.loc_address;
   var lat = req.body.loc_lat;
@@ -38,15 +34,18 @@ router.post('/loc', function(req, res) {
   var sql_insert = "insert into location (loc_name, loc_address, loc_lat, loc_lng, loc_type) values(?,?,?, ?, ?);";
   var sql_get = "select *  from location order by loc_id desc limit 1;"
 
-  db.get().query(sql_insert, function (err, rows) {
-      if (err) return res.sendStatus(400);
-
-      db.get().query(sql_get, function (err, result) {
-        if (err) return res.sendStatus(400);
-
-        res.status(200).send('' + result.loc_id);
-      });
-
+  db.get().query(sql_insert, function (err, result) {
+      // if (err) return res.sendStatus(400);
+      //
+      // db.get().query(sql_get, function (err, result) {
+      //   if (err) return res.sendStatus(400);
+      //
+      //   res.status(200).send('' + result.loc_id);
+      // });
+      if(err){
+          console.log(err);
+      }
+      response.status(200).send(''+result.insertId);
   });
 
 });
@@ -70,21 +69,19 @@ router.post('/info', function(request, response, next) {
     // loc_id
     // pic_id
 
-
     var item_type = request.body.item_type;
-    var item_id = request.body.item_id;
     var user_id = request.body.user_id;
     var item_title = request.body.item_title;
     var item_content = request.body.item_content;
     var item_reg_date = request.body.item_reg_date;
     var item_date = request.body.item_date;
     var cat_id = request.body.cat_id;
-
+    var loc_id = request.body.loc_id;
 
     var sql_insert =
-    "insert into item (member_seq, name, tel, address, latitude, longitude, description)"
-    + " values(?,?,?,?,?,?,?); ";
-    var value = [member_seq, name, tel, address, latitude, longitude, description];
+    "insert into item (item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id)"
+    + " values(?,?,?,?,?,?,?,?); ";
+    var value = [item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id];
     console.log("sql_insert : "+sql_insert);
 
     db.get().query(sql_insert, value, function(err, result){
@@ -104,9 +101,9 @@ router.post('/info/image', function (req, res) {
     });
 
     form.parse(req, function(err, fields, files) {
-      var sql_insert = "insert into bestfood_info_image (info_seq, filename, image_memo) values (?, ?, ?);";
+      var sql_insert = "insert into picture (item_type, item_id, pic_name) values (?, ?, ?);";
 
-      db.get().query(sql_insert, [fields.info_seq, files.file.name, fields.image_memo], function (err, rows) {
+      db.get().query(sql_insert, [fields.item_type,  fields.item_id, files.file.name], function (err, rows) {
         res.sendStatus(200);
       });
     });
