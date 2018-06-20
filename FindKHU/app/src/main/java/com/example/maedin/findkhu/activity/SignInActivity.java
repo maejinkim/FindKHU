@@ -12,11 +12,13 @@ import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.fragment.SignIn;
+import com.example.maedin.findkhu.item.LoginItem;
 import com.example.maedin.findkhu.item.MemberInfoItem;
 import com.example.maedin.findkhu.lib.StringLib;
 import com.example.maedin.findkhu.remote.IRemoteService;
 import com.example.maedin.findkhu.remote.ServiceGenerator;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -40,7 +42,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
 
         btn_signup = (Button) findViewById(R.id.sign_button);
         btn_signup.setOnClickListener(this);
-        btn_signin = (Button) findViewById(R.id.sign_button);
+        btn_signin = (Button) findViewById(R.id.login_button);
         btn_signin.setOnClickListener(this);
 
         edit_id  = (EditText) findViewById(R.id.edit_id);
@@ -52,21 +54,21 @@ public class SignInActivity extends Activity implements View.OnClickListener {
     /**
      * 사용자 계정 확인2. 가져온 정보 서버에서 확인
      */
-    private void selectMemberInfoFromServer(String id){
+    private void CheckLoginInfo(LoginItem loginItem){
 
 
         // 결국 Retrofit 생성 -> GET 요청으로 데이터 불러오기 -> 성공 여부에 따라 다음으로 넘어갈지 결정
         IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
 
-        Call<MemberInfoItem> call = remoteService.selectMemberInfo(id);
+        Call<MemberInfoItem> call = remoteService.loginCheck(loginItem);
         call.enqueue(new Callback<MemberInfoItem>() {
             @Override
             public void onResponse(Call<MemberInfoItem> call, Response<MemberInfoItem> response) {
                 Log.e("[index화면] 3.1 계정 불러오기", "성공");
                 MemberInfoItem item = response.body();
-                String pw = edit_pw.getText().toString();
+
                 //response 성공 및 패스워드 일치
-                if(response.isSuccessful() && (pw.equals(item.pw))){
+                if(response.isSuccessful()){
 
                     startMain();
 
@@ -75,7 +77,7 @@ public class SignInActivity extends Activity implements View.OnClickListener {
                 }
             }
             @Override
-            public void onFailure(Call<MemberInfoItem> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.e("[index화면] 3. 계정 불러오기", "서버 통신에 실패");
                 Toast.makeText(SignInActivity.this, "서버 통신에 실패했습니다.", Toast.LENGTH_SHORT).show();
             }
@@ -100,9 +102,13 @@ public class SignInActivity extends Activity implements View.OnClickListener {
         }
         else if (v.getId() == R.id.login_button)
         {
-            String id = edit_id.getText().toString();
-            Log.e("[login 화면] 아이디 입력", id+"");
-            selectMemberInfoFromServer(id);
+
+            LoginItem loginItem = new LoginItem();
+            loginItem.id = edit_id.getText().toString();
+            loginItem.pw = edit_pw.getText().toString();
+
+            Log.e("[login 화면] 아이디,패스워드 입력", loginItem.id +"");
+            CheckLoginInfo(loginItem);
         }
     }
 }

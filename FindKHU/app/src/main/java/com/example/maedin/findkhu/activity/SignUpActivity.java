@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
+import com.example.maedin.findkhu.fragment.SignIn;
 import com.example.maedin.findkhu.item.MemberInfoItem;
 import com.example.maedin.findkhu.remote.IRemoteService;
 import com.example.maedin.findkhu.remote.ServiceGenerator;
@@ -60,12 +61,12 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
 
     /**
      * ******경   축******
-     * 메인 액티비티로 넘어감
+     * 로그인 액티비티로 넘어감
      */
-    private void startMain() {
-        Intent intent = new Intent(this, MainActivity.class);
+    private void returnLogin() {
+        Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
-        Log.e("[index화면] 4. 초기 작업 완료", "메인 화면으로 넘어감");
+        Log.e("[signup 화면] 회원가입 완료 ", "로그인 화면으로 넘어감");
         finish();
     }
 
@@ -128,25 +129,12 @@ public class SignUpActivity extends Activity implements View.OnClickListener {
                         e.printStackTrace();
                     }
                     Log.e("Response 리턴값", name);
-//                    try {
-//                        item.name = name;
-//                        if (item.seq == 0) {
-//                            return;
-//                        }
-//                    } catch (Exception e) {
-//                        return;
-//                    }
-//                    item.name = newItem.name;
-//                    item.id = newItem.id;
-//                    item.nickname = newItem.nickname;
-//                    item.pw = newItem.pw;
-//                    item.major = newItem.major;
-//                    item.phone = newItem.phone;
-                    Log.e("프로필 설정", "성공");
+//
+                    Log.e("회원가입", "성공");
                     Toast.makeText(SignUpActivity.this, "성공!", Toast.LENGTH_SHORT).show();
-                    //finish();
+                    returnLogin();
                 } else {
-                    Log.e("프로필 설정", "오류");
+                    Log.e("회원가입", "오류");
                     Toast.makeText(SignUpActivity.this, "실패!", Toast.LENGTH_SHORT).show();
                 }
             }
