@@ -99,12 +99,12 @@ router.post('/info', function(req, res) {
   // 컨버터팩토리를 사용했기 때문에 분리되어서 꺼낼 수 있는 듯 하다
   // 그런게 아니라 노드 서버에서 body-parser 모듈을 사용했기 때문에 json으로 전달되는 데이터가
   // 분리되어 들어오는 것이다.
-  var id = req.body.id;
-  var pw = sha256(req.body.pw);
-  var name = req.body.name;
-  var nickname = req.body.nickname;
-  var major = req.body.major;
-  var phone = req.body.phone;
+  var id = req.body.user_id;
+  var pw = sha256(req.body.user_pw);
+  var name = req.body.user_name;
+  var nickname = req.body.user_nickname;
+  var major = req.body.user_major;
+  var phone = req.body.user_phone;
 
   console.log({id,pw , name, nickname, major, phone});
 
