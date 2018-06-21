@@ -16,7 +16,10 @@ import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.activity.MainActivity;
 import com.example.maedin.findkhu.activity.MyApp;
 import com.example.maedin.findkhu.adapter.ListViewAdapter;
+import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.list.ListVO;
+import com.example.maedin.findkhu.remote.IRemoteService;
+import com.example.maedin.findkhu.remote.ServiceGenerator;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -28,6 +31,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnClickListener{
 
@@ -110,17 +118,34 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
                 fragment.getView().setVisibility(View.INVISIBLE);
                 listView.setVisibility(View.VISIBLE);
 
-                ArrayList<ListVO> listItem = new ArrayList<>();
+                //ArrayList<ListVO> listItem = new ArrayList<>();
+                ArrayList<InfoItem> listItem;
 
+                IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
+                Call<List<InfoItem>> call = remoteService.listFoodInfo(1);
+                call.enqueue(new Callback<List<InfoItem>>() {
+                    @Override
+                    public void onResponse(Call<List<InfoItem>> call, Response<List<InfoItem>> response) {
+                        List<InfoItem> list = response.body();
+                        if(response.isSuccessful() && list != null){
+                            infoListAdapter.addItemList(list);
+                            if(infoListAdapter.getItemCount() == 0){
+                                noDataText.setVisibility(View.VISIBLE);
+                            } else {
+                                noDataText.setVisibility(View.GONE);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<List<InfoItem>> call, Throwable t) {
 
-                //어뎁터를 통한 값 전달
-                for(int i=0; i < 20; i++)
-                {
-                    ListVO item = new ListVO();
-                    item.setText(i+"번째 정보");
-                    item.onClickListener = this;
-                    listItem.add(item);
-                }
+                    }
+                });
+
+                //onclickListener 등록
+                for(int i=0; i < listItem.size(); i++)
+                    listItem.get(i).onClickListener = this;
+
                 //어뎁터 할당
                 adapter = new ListViewAdapter(listItem);
                 listView.setAdapter(adapter);

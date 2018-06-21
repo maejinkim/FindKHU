@@ -18,14 +18,16 @@ import java.util.ArrayList;
 public class ListViewAdapter extends BaseAdapter {
 
     //넣어줄 데이터 리스트
-    private ArrayList<ListVO> listVO = null;
+    //private ArrayList<ListVO> listVO = null;
+    private ArrayList<InfoItem> listVO = null;
     private int listCnt = 0;
+    private String[] cat = {"지갑","카드","가방","의류","휴대폰","귀금속","전자제품","기타"};
 
     LayoutInflater inflater = null;
 
 
     //생성자 : 데이터 셋팅
-    public ListViewAdapter(ArrayList<ListVO> _listVO) {
+    public ListViewAdapter(ArrayList<InfoItem> _listVO) {
         listVO = _listVO;
         listCnt = listVO.size();
 
@@ -58,8 +60,9 @@ public class ListViewAdapter extends BaseAdapter {
         //위젯과 연결
         TextView text = (TextView) convertView.findViewById(R.id.text);
 
+        //"[ "+listVO.get(position).+" ] "
         //아이템 내 각 위젯에 데이터 반영
-        text.setText(listVO.get(position).getText());
+        text.setText("[ "+cat[listVO.get(position).cat_id-1]+" ] "+listVO.get(position).item_title);
 
 
         convertView.setOnClickListener(new View.OnClickListener()
@@ -89,11 +92,11 @@ public class ListViewAdapter extends BaseAdapter {
         return listVO.get(position);
     }
 
-    //데이터값 추가
-    public void addVO(String text)
-    {
-        ListVO item = new ListVO();
-        item.setText(text);
-        listVO.add(item);
-    }
+//    //데이터값 추가
+//    public void addVO(String text)
+//    {
+//        InfoItem item = new InfoItem();
+//        item.setText(text);
+//        listVO.add(item);
+//    }
 }

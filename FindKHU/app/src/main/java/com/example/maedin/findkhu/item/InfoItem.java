@@ -2,6 +2,7 @@ package com.example.maedin.findkhu.item;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.View;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -24,6 +25,7 @@ public class InfoItem implements Parcelable{
     public int cat_id;
     public int loc_id;
     public int pic_id;
+    public View.OnClickListener onClickListener;
 
     public InfoItem()
     {
@@ -84,4 +86,5 @@ public class InfoItem implements Parcelable{
         dest.writeInt(loc_id);
         dest.writeInt(pic_id);
     }
+
 }
