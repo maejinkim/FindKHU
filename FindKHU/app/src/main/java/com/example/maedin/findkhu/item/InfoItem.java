@@ -25,7 +25,7 @@ public class InfoItem implements Parcelable{
     public int cat_id;
     public int loc_id;
     public int pic_id;
-    //public View.OnClickListener onClickListener;
+    public View.OnClickListener onClickListener;
 
     public InfoItem()
     {

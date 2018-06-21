@@ -177,6 +177,8 @@ public class MapSelect extends Fragment implements OnMapReadyCallback, GoogleMap
                     Log.e("Response 리턴값", loc_id);
                     Log.e("marker 등록", "성공");
 
+                    locItem.loc_id = Integer.parseInt(loc_id);
+                    ((MyApp)getActivity().getApplication()).addLocItem(locItem);
                     ((MyApp)getActivity().getApplication()).setLoc_id(Integer.parseInt(loc_id));
                     if (((MyApp)getActivity().getApplication()).getPostSelect() == 1)
                     {

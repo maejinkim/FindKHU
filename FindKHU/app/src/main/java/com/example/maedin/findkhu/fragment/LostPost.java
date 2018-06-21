@@ -74,6 +74,8 @@ public class LostPost extends Fragment implements View.OnClickListener{
     Spinner category;
     ImageView image;
 
+    DatePickerDialog d;
+
     Activity context;
     SpinnerAdapter sAdapter;
 
@@ -370,7 +372,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
     private void postUpload()
     {
 
-        InfoItem infoItem = new InfoItem();
+        final InfoItem infoItem = new InfoItem();
         infoItem.item_type = ((MyApp)getActivity().getApplication()).getPostSelect();
         infoItem.cat_id = cat_id;
         infoItem.user_id = ((MyApp)getActivity().getApplication()).getMemberID();
@@ -397,6 +399,9 @@ public class LostPost extends Fragment implements View.OnClickListener{
                     }
                     Log.e("Response 리턴값", loc_id);
                     Log.e("포스트 등록", "성공");
+
+                    infoItem.item_id = Integer.parseInt(loc_id);
+                    ((MyApp)getActivity().getApplication()).addInfoItem(infoItem);
 
 
                     if (((MyApp)getActivity().getApplication()).getPostSelect() == 1)

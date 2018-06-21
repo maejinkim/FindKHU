@@ -60,7 +60,10 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.lost_board, container, false);
 
+        //ArrayList<>
         listItem = new ArrayList<>();
+        //for (int i = 0; )
+        listItem = ((MyApp)getActivity().getApplication()).getListItem();
 
         //변수 초기화
 
@@ -116,51 +119,48 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
             {
 
 
+
+
                 fragment.getView().setVisibility(View.INVISIBLE);
                 listView.setVisibility(View.VISIBLE);
 
-                //ArrayList<ListVO> listItem = new ArrayList<>();
-
-
-                IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
-                Call<ArrayList<InfoItem>> call = remoteService.listFoodInfo(1);
-                call.enqueue(new Callback<ArrayList<InfoItem>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<InfoItem>> call, Response<ArrayList<InfoItem>> response) {
-                            listItem = response.body();
-                            
-
+//                IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
+//                Call<String> call = remoteService.listFoodInfo(1);
+//                call.enqueue(new Callback<String>() {
+//                    @Override
+//                    public void onResponse(Call<String> call, Response<String> response) {
+//                            //listItem.add(response.body().get(0));
+//                        Toast.makeText(getActivity(),response.body(),Toast.LENGTH_SHORT).show();
+//
+//
 //                        if(response.isSuccessful() && list != null){
 //                            infoListAdapter.addItemList(list);
-////                            if(infoListAdapter.getItemCount() == 0){
-////                                noDataText.setVisibility(View.VISIBLE);
-////                            } else {
-////                                noDataText.setVisibility(View.GONE);
-////                            }
-//                        }
-                    }
-                    @Override
-                    public void onFailure(Call<ArrayList<InfoItem>> call, Throwable t) {
+//                            if(infoListAdapter.getItemCount() == 0){
+//                                noDataText.setVisibility(View.VISIBLE);
+//                            } else {
+//                                noDataText.setVisibility(View.GONE);
+//                            }
+//                       }
+//                    }
+//                    @Override
+//                    public void onFailure(Call<String> call, Throwable t) {
+//
+//                    }
+//                });
+//
 
-                    }
-                });
 
-
-
-//                //onclickListener 등록
-//                for(int i=0; i < listItem.size(); i++)
-//                    listItem.get(i).onClickListener = this;
+                //onclickListener 등록
+                for(int i=0; i < listItem.size(); i++)
+                    listItem.get(i).onClickListener = this;
 
                 //어뎁터 할당
-                if (listItem == null)
+                if (listItem.size() == 0)
                 {
                     Toast.makeText(getActivity(),"데이터 없음",Toast.LENGTH_SHORT).show();
                 }
-
                 adapter = new ListViewAdapter(listItem);
                 listView.setAdapter(adapter);
-
-
 
                 break;
             }

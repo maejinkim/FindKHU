@@ -134,7 +134,7 @@ router.get('/list', function(req, res, next) {
         if (err) return res.sendStatus(400);
 
         console.log("rows : " + JSON.stringify(rows));
-        res.status(200).json(rows);
+        res.status(200).send(''+JSON.stringify(rows));
     });
 });
 
