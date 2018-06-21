@@ -48,6 +48,7 @@ import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -74,7 +75,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
     Spinner category;
     ImageView image;
 
-    DatePickerDialog d;
+
 
     Activity context;
     SpinnerAdapter sAdapter;
@@ -153,6 +154,10 @@ public class LostPost extends Fragment implements View.OnClickListener{
                 ((MainActivity)getActivity()).replaceFragment(new MapSelect());
             break;
             case R.id.btn_select_date:
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
                 new DatePickerDialog(this.getActivity(), mDateSetListener, mYear, mMonth, mDay).show();
                 break;
 
