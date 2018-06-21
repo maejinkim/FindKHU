@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
@@ -52,18 +53,14 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
 
     Button btn_map;
     Button btn_list;
-
     Button btn_post;
+    TextView board_name;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.lost_board, container, false);
 
-        //ArrayList<>
-        listItem = new ArrayList<>();
-        //for (int i = 0; )
-        listItem = ((MyApp)getActivity().getApplication()).getListItem();
 
         //변수 초기화
 
@@ -71,6 +68,7 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
         btn_map = (Button) view.findViewById(R.id.btn_view_lost_map);
         btn_list = (Button) view.findViewById(R.id.btn_view_lost_board);
         btn_post = (Button) view.findViewById(R.id.btn_lost_post);
+        board_name = (TextView) view.findViewById(R.id.board_name);
 
         listView.setVisibility(View.INVISIBLE);
 
@@ -82,6 +80,23 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
         btn_map.setOnClickListener(this);
         btn_list.setOnClickListener(this);
         btn_post.setOnClickListener(this);
+
+
+        ArrayList<InfoItem> templist = ((MyApp)getActivity().getApplication()).getListItem();
+        //ArrayList<>
+        listItem = new ArrayList<>();
+
+        for (int i =0; i < templist.size(); i++)
+        {
+            if (((MyApp)getActivity().getApplication()).getPostSelect() == templist.get(i).item_type)
+                listItem.add(templist.get(i));
+        }
+
+        if (((MyApp)getActivity().getApplication()).getPostSelect() == 1)
+            board_name.setText("분실물 게시판");
+        else
+            board_name.setText("습득물 게시판");
+
 
         return view;
     }
@@ -117,10 +132,6 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
         {
             case R.id.btn_view_lost_board:
             {
-
-
-
-
                 fragment.getView().setVisibility(View.INVISIBLE);
                 listView.setVisibility(View.VISIBLE);
 
@@ -176,7 +187,6 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
             }
             case R.id.btn_lost_post:
             {
-                ((MyApp)getActivity().getApplication()).setPostSelect(1);
                 ((MainActivity)getActivity()).replaceFragment(new LostPost());
                 break;
             }

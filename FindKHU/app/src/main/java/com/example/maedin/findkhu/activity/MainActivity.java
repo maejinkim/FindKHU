@@ -114,11 +114,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (item.getItemId()) {
             case R.id.navigation_item_lost:
+                ((MyApp)getApplication()).setPostSelect(1);
                 manager.beginTransaction().replace(R.id.content_main, new LostBoard()).commit();
                 break;
 
             case R.id.navigation_item_find:
-                manager.beginTransaction().replace(R.id.content_main, new FindBoard()).commit();
+                ((MyApp)getApplication()).setPostSelect(2);
+                manager.beginTransaction().replace(R.id.content_main, new LostBoard()).commit();
                 break;
 
             case R.id.navigation_item_complete:
