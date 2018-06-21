@@ -59,8 +59,10 @@
 
             <Button
                 android:layout_width="50dp"
+                android:layout_height="35dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/roundbutton"
                 android:text="날짜"
-                android:layout_height="wrap_content"
                 android:id="@+id/btn_select_date"/>
 
         </LinearLayout>
@@ -74,6 +76,9 @@
         <Button
             android:layout_width="100dp"
             android:layout_gravity="center"
+            android:layout_height="35dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/roundbutton"
             android:text="지도"
             android:id="@+id/btn_lost_select_map"
             />
@@ -99,12 +104,18 @@
         <Button
             android:text="업로드"
             android:layout_width="60dp"
-            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:layout_height="35dp"
+            android:background="@drawable/roundbutton"
             android:textSize="5pt"
             android:id="@+id/btn_lost_pic"/>
 
         <Button
             android:id="@+id/btn_lost_post_ok"
+            android:layout_margin="5dp"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:background="@drawable/roundbutton"
             android:text="등록"
             android:layout_gravity="right"
             android:layout_columnSpan="2"/>

@@ -28,8 +28,9 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_margin="20dp"
+        android:background="@drawable/roundbutton"
         android:id="@+id/btn_map_select_ok"
         android:text="확인"/>
 

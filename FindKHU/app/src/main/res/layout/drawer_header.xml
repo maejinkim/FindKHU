@@ -44,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logout"
+
             android:background = "#ffffff"
             android:textColor="#8e8e8e"
             android:id="@+id/btn_logout"/>

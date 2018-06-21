@@ -11,10 +11,11 @@
 
     <Button
         android:id="@+id/sign_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
         android:layout_marginBottom="176dp"
         android:text="회원가입"
+        android:layout_height="37dp"
+        android:background="@drawable/roundbutton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/login_button"
@@ -22,8 +23,9 @@
 
     <Button
         android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="37dp"
+        android:background="@drawable/roundbutton"
         android:layout_marginEnd="10dp"
         android:text="로그인"
         app:layout_constraintBaseline_toBaselineOf="@+id/sign_button"
