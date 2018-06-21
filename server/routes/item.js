@@ -72,16 +72,16 @@ router.post('/info', function(request, response, next) {
     var user_id = request.body.user_id;
     var item_title = request.body.item_title;
     var item_content = request.body.item_content;
-    var item_reg_date = request.body.item_reg_date;
-    var item_date = new Date();
+    var item_date = request.body.item_reg_date;
+    var item_reg_date = new Date();
     var cat_id = request.body.cat_id;
     var loc_id = request.body.loc_id;
-    var pic_id = request.body.pic_id;
+  //  var pic_id = request.body.pic_id;
 
     var sql_insert =
-    "insert into item (item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id, pic_id)"
-    + " values(?,?,?,?,?,?,?,?,?); ";
-    var value = [item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id, pic_id];
+    "insert into item (item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id)"
+    + " values(?,?,?,?,?,?,?,?); ";
+    var value = [item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id];
     console.log("sql_insert : "+sql_insert);
 
     db.get().query(sql_insert, value, function(err, result){
@@ -94,6 +94,8 @@ router.post('/info', function(request, response, next) {
 
 //food/info/image
 router.post('/info/image', function (req, res) {
+  console.log("info/image" + "??");
+
     var form = new formidable.IncomingForm();
 
     form.on('fileBegin', function (name, file){
@@ -102,8 +104,10 @@ router.post('/info/image', function (req, res) {
 
     form.parse(req, function(err, fields, files) {
       var sql_insert = "insert into picture (item_type, item_id, pic_name) values (?, ?, ?);";
+      console.log(sql_insert);
 
       db.get().query(sql_insert, [fields.item_type,  fields.item_id, files.file.name], function (err, rows) {
+          console.log("성공?" + result.insertId);
           response.status(200).send(''+result.insertId);
       });
     });

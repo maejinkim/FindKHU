@@ -18,8 +18,8 @@ public class ImageItem {
         return "ImageItem{" +
                 "pic_id=" + pic_id +
                 ", item_type=" + item_type +
-                ", item_id='" + item_id + '\'' +
-                ", pic_name='" + pic_name + '\''+
+                ", item_id=" + item_id +
+                ", pic_name=" + pic_name +
                 '}';
     }
 }
