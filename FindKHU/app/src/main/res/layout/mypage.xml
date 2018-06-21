@@ -49,10 +49,11 @@
             android:layout_gravity="center"
             android:text="  님"/>
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="37dp"
             android:textSize="15dp"
             android:layout_gravity="center"
+            android:background="@drawable/roundbutton"
             android:layout_marginLeft="10dp"
             android:id="@+id/edit_my_info"
             android:text="정보수정"/>
@@ -69,19 +70,25 @@
         <Button
             android:id="@+id/myComment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_height="37dp"
+            android:background="@drawable/roundbutton"
             android:textSize="17dp"
             android:text="내가 쓴글"/>
         <Button
             android:id="@+id/CommentedPost"
              android:layout_width="match_parent"
-             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_height="37dp"
+            android:background="@drawable/roundbutton"
             android:textSize="17dp"
              android:text="댓글 단글"/>
         <Button
             android:id="@+id/completedPost"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_height="37dp"
+            android:background="@drawable/roundbutton"
             android:textSize="17dp"
             android:text="완료된 글"/>
 

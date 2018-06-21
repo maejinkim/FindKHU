@@ -29,17 +29,28 @@
         <Button
             android:id="@+id/btn_call_bus"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="34dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/roundbutton"
             android:textSize="17dp"
             android:text="031 - 201 - 2915"
             android:onClick="openDial1"/>
         <Button
             android:id="@+id/btn_call_bus2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="34dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/roundbutton"
             android:textSize="17dp"
             android:text="010 - 6724 - 6221"
             android:onClick="openDial1"/>
+
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_gravity="center"
+            android:textSize="20dp"/>
 
         <TextView
             android:layout_width="130dp"
@@ -50,18 +61,29 @@
         <Button
             android:id="@+id/btn_call_daewon"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="34dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/roundbutton"
             android:textSize="17dp"
             android:text="031 - 204 - 6657"
             android:onClick="openDial2"/>
         <Button
             android:id="@+id/btn_call_daewon2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="34dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/roundbutton"
             android:textSize="17dp"
             android:text="031 - 206 - 1570"
             android:onClick="openDial2"/>
 
+
+        <TextView
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_gravity="center"
+            android:textSize="20dp"/>
         <TextView
             android:layout_width="130dp"
             android:layout_height="wrap_content"
@@ -69,12 +91,14 @@
             android:layout_gravity="center"
             android:textSize="20dp"/>
         <Button
-        android:id="@+id/btn_call_yongnam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="17dp"
-        android:text="031 - 281 - 7105"
-        android:onClick="openDial3"/>
+            android:id="@+id/btn_call_yongnam"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/roundbutton"
+            android:textSize="17dp"
+            android:text="031 - 281 - 7105"
+            android:onClick="openDial3"/>
 
 
         ></LinearLayout>

@@ -41,9 +41,10 @@
 
         <Button
             android:id="@+id/btn_lost_post"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="150dp"
+            android:layout_width="60dp"
+            android:layout_height="35dp"
+            android:background="@drawable/roundbutton"
             android:text="글쓰기" />
 
     </LinearLayout>
