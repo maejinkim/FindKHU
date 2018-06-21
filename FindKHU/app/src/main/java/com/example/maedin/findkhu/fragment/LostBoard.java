@@ -18,6 +18,7 @@ import com.example.maedin.findkhu.activity.MainActivity;
 import com.example.maedin.findkhu.activity.MyApp;
 import com.example.maedin.findkhu.adapter.ListViewAdapter;
 import com.example.maedin.findkhu.item.InfoItem;
+import com.example.maedin.findkhu.item.LocItem;
 import com.example.maedin.findkhu.list.ListVO;
 import com.example.maedin.findkhu.remote.IRemoteService;
 import com.example.maedin.findkhu.remote.ServiceGenerator;
@@ -29,27 +30,32 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnClickListener{
+public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnClickListener, GoogleMap.OnMarkerClickListener {
 
     View view;
     GoogleMap map;
     SupportMapFragment fragment;
 
     ArrayList<InfoItem> listItem;
+    ArrayList<LocItem> locItem;
 
     private ListView listView;
     private ListViewAdapter adapter;
 
     private MapView mapView;
+
+    private HashMap<Marker, InfoItem> markerMap = new HashMap<>();
 
     Button btn_map;
     Button btn_list;
@@ -107,23 +113,52 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
         this.map = map;
         MapsInitializer.initialize(this.getActivity());
 
-
+        map.setOnMarkerClickListener(this);
         LatLng SEOUL = new LatLng(37.56, 126.97);
 
         //지도 이동
         //map.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
         //map.animateCamera(CameraUpdateFactory.zoomTo(15));
 
+        ArrayList<LocItem> templist = ((MyApp)getActivity().getApplication()).getListIoc();
+
         CameraPosition cp = new CameraPosition.Builder().target((SEOUL)).zoom(15).build();
         map.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
+        for (int i =0; i < listItem.size(); i++)
+        {
+            for(int j = 0; j < templist.size(); j++)
+            {
+                if(listItem.get(i).loc_id == templist.get(j).loc_id)
+                {
+                    locItem.add(templist.get(j));
+                }
+            }
+        }
 
+        for(int i = 0; i<locItem.size(); i++)
+        {
+            MarkerOptions markerOptions = new MarkerOptions();
+            LatLng tmp = new LatLng(locItem.get(i).loc_lat, locItem.get(i).loc_lng);
+            markerOptions.position(tmp); //마커가 표시될 위치
+            markerOptions.title(listItem.get(i).item_title); //마커타이틀
+            markerMap.put( map.addMarker(markerOptions), listItem.get(i));
+              //지도에 마커 추가
+        }
         //마커 설정
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(SEOUL); //마커가 표시될 위치
-        markerOptions.title("서울"); //마커타이틀
-        markerOptions.snippet("한국의 수도");   //마커설명
-        map.addMarker(markerOptions);   //지도에 마커 추가
+
+    }   /**
+     * 구글맵에서 마커가 클릭되었을 때 호출된다.
+     * @param marker 클릭한 마커에 대한 정보를 가진 객체
+     * @return 마커 이벤트를 처리했다면 true, 그렇지 않다면 false
+     */
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        InfoItem item = markerMap.get(marker);
+        //여기서 item으로 가면 될듯,,
+        GoLib.getInstance().goBestFoodInfoActivity(context, item.seq);
+        return true;
     }
+
 
     @Override
     public void onClick(View v) {
