@@ -89,6 +89,7 @@
             android:layout_height="150dp"
             android:layout_gravity="fill_horizontal"
             android:background="#ffdfdf"
+            android:gravity="center"
             android:id="@+id/edit_lost_contents"/>
 
 

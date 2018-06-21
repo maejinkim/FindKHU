@@ -82,7 +82,7 @@ public class MapSelect extends Fragment implements OnMapReadyCallback, GoogleMap
 
         locItem = new LocItem();
 
-        LatLng SEOUL = new LatLng(37.56, 126.97);
+        LatLng SEOUL = new LatLng(37.2418785, 127.0797748);
 
         //지도 이동
         //map.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));

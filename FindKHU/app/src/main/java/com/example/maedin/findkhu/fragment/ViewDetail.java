@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,17 @@ import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.activity.MainActivity;
 import com.example.maedin.findkhu.activity.MyApp;
 import com.example.maedin.findkhu.item.InfoItem;
+import com.example.maedin.findkhu.item.LocItem;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 public class ViewDetail extends Fragment implements View.OnClickListener {
 
@@ -28,6 +40,7 @@ public class ViewDetail extends Fragment implements View.OnClickListener {
     Button btn_notice;
     Button btn_complete;
     Button btn_map;
+
 
     private String[] cat = {"지갑","카드","가방","의류","휴대폰","귀금속","전자제품","기타"};
 
@@ -84,7 +97,9 @@ public class ViewDetail extends Fragment implements View.OnClickListener {
         }
         else if (v.getId() == R.id.btn_detail_map)
         {
-
+            ViewMap viewMap = new ViewMap();
+            viewMap.setInfoItem(infoItem);
+            ((MainActivity)getActivity()).replaceFragment(viewMap);
         }
         else
         {
@@ -95,18 +110,4 @@ public class ViewDetail extends Fragment implements View.OnClickListener {
     }
 
 
-    public void showMap()
-    {
-
-
-        final LinearLayout dlg_layout = (LinearLayout)View.inflate(getActivity(), R.layout.view_map, null);
-
-        AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
-        dlg.setTitle(infoItem.item_title);
-        dlg.setView(dlg_layout);
-        dlg.setPositiveButton("확인",null);
-
-
-
-    }
 }

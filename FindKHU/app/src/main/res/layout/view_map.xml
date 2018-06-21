@@ -7,14 +7,6 @@
     android:gravity="center_horizontal">
 
 
-    <TextView
-        android:gravity="center"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/txt_map_title"
-        android:textSize="40dp"
-        android:layout_marginTop="20dp"
-        />
 
     <TextView
         android:layout_width="300dp"
@@ -27,6 +19,13 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:id="@+id/btn_back"
+        android:text="돌아가기"/>
 
 
 </LinearLayout>

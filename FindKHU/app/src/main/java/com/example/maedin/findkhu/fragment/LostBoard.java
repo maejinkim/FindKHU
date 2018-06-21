@@ -91,6 +91,7 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
         ArrayList<InfoItem> templist = ((MyApp)getActivity().getApplication()).getListItem();
         //ArrayList<>
         listItem = new ArrayList<>();
+        locItem = new ArrayList<>();
 
         for (int i =0; i < templist.size(); i++)
         {
@@ -114,7 +115,7 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
         MapsInitializer.initialize(this.getActivity());
 
         map.setOnMarkerClickListener(this);
-        LatLng SEOUL = new LatLng(37.56, 126.97);
+        LatLng SEOUL = new LatLng(37.2418785, 127.0797748);
 
         //지도 이동
         //map.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
@@ -145,7 +146,6 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
               //지도에 마커 추가
         }
         //마커 설정
-
     }   /**
      * 구글맵에서 마커가 클릭되었을 때 호출된다.
      * @param marker 클릭한 마커에 대한 정보를 가진 객체
@@ -155,7 +155,8 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
     public boolean onMarkerClick(Marker marker) {
         InfoItem item = markerMap.get(marker);
         //여기서 item으로 가면 될듯,,
-        GoLib.getInstance().goBestFoodInfoActivity(context, item.seq);
+        ((MainActivity)getActivity()).replaceDetail(item);
+        //GoLib.getInstance().goBestFoodInfoActivity(context, item.seq);
         return true;
     }
 
