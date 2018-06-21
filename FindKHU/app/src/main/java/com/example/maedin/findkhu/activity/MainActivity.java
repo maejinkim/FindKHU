@@ -21,15 +21,12 @@ import android.widget.Toast;
 
 import com.example.maedin.findkhu.fragment.CenterInfo;
 import com.example.maedin.findkhu.fragment.CompleteBoard;
-import com.example.maedin.findkhu.fragment.FindBoard;
 import com.example.maedin.findkhu.fragment.Home;
 import com.example.maedin.findkhu.fragment.LostBoard;
-import com.example.maedin.findkhu.fragment.LostPost;
 import com.example.maedin.findkhu.fragment.MyPage;
 import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.fragment.NoticeView;
 import com.example.maedin.findkhu.fragment.SearchInput;
-import com.example.maedin.findkhu.fragment.SignIn;
 import com.example.maedin.findkhu.fragment.ViewDetail;
 import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.item.MemberInfoItem;
@@ -180,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void replaceDetail(InfoItem item)
     {
         ViewDetail detail = new ViewDetail();
+        detail.setInfoItem(item);
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.content_main, detail).commit();
     }

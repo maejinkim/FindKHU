@@ -70,13 +70,9 @@ public class ListViewAdapter extends BaseAdapter {
         {
             @Override
             public void onClick(View v) {
-                InfoItem item = null;
-                ((MainActivity)v.getContext()).replaceDetail(item);
-                Toast.makeText(context, (pos+1) + "번째 리스트가 클릭되었습니다.", Toast.LENGTH_SHORT).show();
+                ((MainActivity)v.getContext()).replaceDetail(listVO.get(pos));
             }
         });
-
-        //convertView.setOnClickListener(listVO.get(position).onClickListener);
 
         convertView.setTag(""+position);
 

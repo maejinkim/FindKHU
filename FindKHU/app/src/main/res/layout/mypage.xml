@@ -84,12 +84,6 @@
             android:layout_height="wrap_content"
             android:textSize="17dp"
             android:text="완료된 글"/>
-        <Button
-            android:id="@+id/andMore"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:text="즐겨찾기"/>
 
 
         ></LinearLayout>

@@ -72,26 +72,43 @@
 
     </TableLayout>
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="right"
+        android:layout_margin="20dp">
 
-        <TableRow>
+        <Button
+            android:id="@+id/btn_notice_check"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/ic_bell"
+            />
 
-            <EditText
-                android:width="300dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/edit_comment"
-                android:text="댓글쓰기"
-                />
+    </LinearLayout>
 
-            <Button
-                android:text="작성"
-                android:id="@+id/btn_comment"/>
 
-        </TableRow>
+    <!--<TableLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-    </TableLayout>
+        <!--<TableRow>-->
+
+            <!--<EditText-->
+                <!--android:width="300dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/edit_comment"-->
+                <!--android:text="댓글쓰기"-->
+                <!--/>-->
+
+            <!--<Button-->
+                <!--android:text="작성"-->
+                <!--android:id="@+id/btn_comment"/>-->
+
+        <!--</TableRow>-->
+
+    <!--</TableLayout>-->
 
 
 </LinearLayout>
