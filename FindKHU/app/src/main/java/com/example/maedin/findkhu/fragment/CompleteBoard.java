@@ -29,7 +29,7 @@ public class CompleteBoard extends Fragment implements View.OnClickListener {
 
 
         view = inflater.inflate(R.layout.complete_board, container, false);
-        listView = (ListView) view.findViewById(R.id.notice_view);
+        listView = (ListView) view.findViewById(R.id.complete_list_view);
 
 
         listItem  = ((MyApp)getActivity().getApplication()).getListComplete();

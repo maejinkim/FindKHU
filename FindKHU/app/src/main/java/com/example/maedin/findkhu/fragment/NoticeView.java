@@ -40,7 +40,7 @@ public class NoticeView extends Fragment implements View.OnClickListener{
 
         for (int i =0; i < templist.size(); i++)
         {
-            if ( templist.get(i) == list.get(i).item_id)
+            if ( templist.get(i).equals(list.get(i).item_id))
                 listItem.add(list.get(i));
         }
         //onclickListener 등록

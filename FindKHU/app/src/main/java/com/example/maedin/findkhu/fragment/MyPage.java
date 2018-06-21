@@ -11,13 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
+import com.example.maedin.findkhu.activity.MyApp;
 
 public class MyPage extends Fragment implements View.OnClickListener {
 
     View view;
+    TextView tx;
     Button btn_edit_my_info;
     Button btn_my_comment;
     Button btn_commented_post;
@@ -31,12 +34,13 @@ public class MyPage extends Fragment implements View.OnClickListener {
 
         view = inflater.inflate(R.layout.mypage, container, false);
 
+        tx = (TextView) view.findViewById(R.id.edit_my_name) ;
         btn_edit_my_info = (Button) view.findViewById(R.id.edit_my_info);
         btn_my_comment = (Button) view.findViewById(R.id.myComment);
         btn_commented_post = (Button) view.findViewById(R.id.CommentedPost);
         btn_completed_post = (Button) view.findViewById(R.id.completedPost);
 
-
+        tx.setText(((MyApp) getActivity().getApplication()).getMemberName());
         btn_edit_my_info.setOnClickListener(this);
         btn_my_comment.setOnClickListener(this);
         btn_commented_post.setOnClickListener(this);
