@@ -81,7 +81,7 @@ public class ViewMap extends Fragment implements View.OnClickListener, OnMapRead
 
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(tmp); //마커가 표시될 위치
-        markerOptions.title(infoItem.item_title); //마커타이틀
+        markerOptions.title(loc.loc_address); //마커타이틀
         map.addMarker(markerOptions);
     }
 }

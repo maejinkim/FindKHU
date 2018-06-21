@@ -36,7 +36,7 @@ public class SearchResult extends Fragment implements View.OnClickListener {
         listView = (ListView) view.findViewById(R.id.search_result_view);
 
 
-        listItem = new ArrayList<InfoItem>();
+        listItem = ((MyApp)getActivity().getApplication()).getListItem();
         ArrayList<InfoItem> result = new ArrayList<>();
 
         for (int i =0; i <listItem.size(); i++)
@@ -47,17 +47,18 @@ public class SearchResult extends Fragment implements View.OnClickListener {
         }
 
         //onclickListener 등록
-        for(int i=0; i < listItem.size(); i++)
-            listItem.get(i).onClickListener = this;
+        for(int i=0; i < result.size(); i++)
+            result.get(i).onClickListener = this;
 
         //어뎁터 할당
-        if (listItem.size() == 0)
+        if (result.size() == 0)
         {
-            Toast.makeText(getActivity(),"데이터 없음",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(),"검색 결과 없음",Toast.LENGTH_SHORT).show();
         }
-        adapter = new ListViewAdapter(listItem);
-        listView.setAdapter(adapter);
-
+        else {
+            adapter = new ListViewAdapter(result);
+            listView.setAdapter(adapter);
+        }
         return view;
 
     }

@@ -43,8 +43,13 @@ public class CompleteBoard extends Fragment implements View.OnClickListener {
         {
             Toast.makeText(getActivity(),"데이터 없음",Toast.LENGTH_SHORT).show();
         }
-        adapter = new ListViewAdapter(listItem);
-        listView.setAdapter(adapter);
+        else
+        {
+            adapter = new ListViewAdapter(listItem);
+            listView.setAdapter(adapter);
+
+        }
+
 
         return view;
     }

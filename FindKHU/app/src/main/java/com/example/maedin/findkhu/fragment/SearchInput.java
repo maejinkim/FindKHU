@@ -29,6 +29,7 @@ public class SearchInput extends Fragment implements View.OnClickListener {
 
         edit_search = (EditText) view.findViewById(R.id.edit_search);
         btn_search = (Button) view.findViewById(R.id.btn_search);
+        btn_search.setOnClickListener(this);
         return view;
     }
 
