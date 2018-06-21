@@ -49,6 +49,9 @@ import com.squareup.picasso.Target;
 import java.io.File;
 import java.io.IOException;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -105,6 +108,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
         btn_pic.setOnClickListener(this);
         btn_date.setOnClickListener(this);
 
+
         final Activity root = getActivity();
         category = (Spinner) view.findViewById(R.id.spinner_category); //butterknife 없을경우
         sAdapter = ArrayAdapter.createFromResource(root, R.array.category, android.R.layout.simple_spinner_dropdown_item);
@@ -133,7 +137,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
         imageItem.item_id = ((MyApp)getActivity().getApplication()).getMemberID();
         imageItem.item_type = ((MyApp)getActivity().getApplication()).getPostSelect();
 
-        //imageFilename = infoSeq + "_" + String.valueOf(System.currentTimeMillis());
+        imageFilename = imageItem.item_id + "_" + String.valueOf(System.currentTimeMillis());
         imageFile = FileLib.getInstance().getImageFile(context, imageFilename);
     }
 
@@ -143,7 +147,6 @@ public class LostPost extends Fragment implements View.OnClickListener{
         {
             case R.id.btn_lost_select_map:
 
-                //((MyApp)getActivity().getApplication()).setPostSelect(1); -> 글쓰기 눌렀을때 설정할것.
                 ((MyApp)getActivity().getApplication()).setLostPost(this);
                 ((MainActivity)getActivity()).replaceFragment(new MapSelect());
             break;
@@ -158,7 +161,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.btn_lost_post_ok:
-                saveImage();
+                //saveImage();
                 postUpload();
 
                 break;
@@ -217,12 +220,53 @@ public class LostPost extends Fragment implements View.OnClickListener{
                 Uri dataUri = data.getData();
                 Picasso.with(context).load(imageFile).into(image);
 
-                ((MyApp)getActivity().getApplication()).setPic_id(Integer.parseInt(RemoteLib.getInstance().uploadItemImage(imageItem.item_id,
-                        imageItem.item_type, imageFile, finishHandler)));
+                //String str = RemoteLib.getInstance().uploadItemImage2(imageItem.item_id, imageItem.item_type, imageFile);
+                String str;
+                final String[] pic_id = {null};
+                IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
 
-                //RemoteLib.getInstance().uploadMemberIcon(memberInfoItem.seq, profileIconFile);
+                RequestBody requestFile =
+                        RequestBody.create(MediaType.parse("multipart/form-data"), imageFile);
 
-                memberInfoItem.memberIconFilename = profileIconFileName + ".png";
+                MultipartBody.Part body =
+                        MultipartBody.Part.createFormData("file", imageFile.getName(), requestFile);
+
+                RequestBody ItemIdBody =
+                        RequestBody.create(
+                                MediaType.parse("multipart/form-data"), "" + imageItem.item_id);
+                RequestBody ItemTypeBody =
+                        RequestBody.create(
+                                MediaType.parse("multipart/form-data"), "" + imageItem.item_type);
+
+                Call<ResponseBody> call =
+                        remoteService.uploadFoodImage(ItemIdBody, ItemTypeBody, body);
+                call.enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if(response.isSuccessful()){
+                            try {
+                                pic_id[0] = response.body().string();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Log.e("[ProfileIcon 확인]", "업로드 성공");
+                        } else {
+                            Log.e("[ProfileIcon 확인]", "업로드 오류");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.e("[ProfileIcon 확인]", "업로드 서버 실패");
+                    }
+                });
+
+                str = pic_id[0];
+
+                int temp = Integer.parseInt(str);
+                ((MyApp)getActivity().getApplication()).setPic_id(temp);
+
+                imageItem.pic_name = imageFilename + ".png";
 
 
 //                if (dataUri != null) {
@@ -244,36 +288,36 @@ public class LostPost extends Fragment implements View.OnClickListener{
 //                        public void onPrepareLoad(Drawable placeHolderDrawable) {
 //                        }
 //                    });
-                }
+   //             }
             }
         }
     }
 
-    /**
-     * 사용자가 선택한 이미지와 입력한 메모를 ImageItem 객체에 저장한다.
-     */
-    private  void setImageItem() {
-        imageItem.pic_name = imageFilename + ".png";
-    }
-
-    Handler imageUploadHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            isSavingImage = false;
-            setImageItem();
-            Picasso.with(context).invalidate(IRemoteService.IMAGE_URL + imageItem.pic_name);
-        }
-    };
-
-    Handler finishHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            context.finish();
-        }
-    };
+//    /**
+//     * 사용자가 선택한 이미지와 입력한 메모를 ImageItem 객체에 저장한다.
+//     */
+//    private  void setImageItem() {
+//        imageItem.pic_name = imageFilename + ".png";
+//    }
+//
+//    Handler imageUploadHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//            isSavingImage = false;
+//            setImageItem();
+//            Picasso.with(context).invalidate(IRemoteService.IMAGE_URL + imageItem.pic_name);
+//        }
+//    };
+//
+//    Handler finishHandler = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            super.handleMessage(msg);
+//
+//            context.finish();
+//        }
+//    };
 
 
     DatePickerDialog.OnDateSetListener mDateSetListener =
@@ -304,24 +348,24 @@ public class LostPost extends Fragment implements View.OnClickListener{
         date = edit_date.getText().toString();
     }
 
-    /**
-     * 이미지를 서버에 업로드한다.
-     */
-    private void saveImage() {
-        if (isSavingImage) {
-            return;
-        }
-
-        if (imageFile.length() == 0) {
-            return;
-        }
-
-        setImageItem();
-
-        ((MyApp)getActivity().getApplication()).setPic_id(Integer.parseInt(RemoteLib.getInstance().uploadItemImage(imageItem.item_id,
-                imageItem.item_type, imageFile, finishHandler)));
-        isSavingImage = false;
-    }
+//    /**
+//     * 이미지를 서버에 업로드한다.
+//     */
+//    private void saveImage() {
+//        if (isSavingImage) {
+//            return;
+//        }
+//
+//        if (imageFile.length() == 0) {
+//            return;
+//        }
+//
+//        setImageItem();
+//
+//        ((MyApp)getActivity().getApplication()).setPic_id(Integer.parseInt(RemoteLib.getInstance().uploadItemImage(imageItem.item_id,
+//                imageItem.item_type, imageFile, finishHandler)));
+//        isSavingImage = false;
+//    }
 
     private void postUpload()
     {
@@ -335,6 +379,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
         infoItem.item_reg_date = edit_date.getText().toString();
         infoItem.loc_id = ((MyApp)getActivity().getApplication()).getLoc_id();
         infoItem.pic_id = ((MyApp)getActivity().getApplication()).getPic_id();
+
 
 
         // 변경 사항 있을 경우
