@@ -150,13 +150,11 @@ public interface IRemoteService {
     /**
      * BestFoodListFragment
      */
-    // 맛집 정보
+    // item type에 따른 가져오기
     @GET("/item/list")
-    Call<List<InfoItem>> listFoodInfo(@Query("member_seq") int memberSeq,
-                                          @Query("user_latitude") double userLatitude,
-                                          @Query("user_longitude") double userLongitude,
-                                          @Query("order_type") String orderType,
-                                          @Query("current_page") int currentPage
+    Call<List<InfoItem>> listFoodInfo(@Query("user_id") int user_id,
+                                          @Query("item_type") double item_type
+
     );
 
     /**
