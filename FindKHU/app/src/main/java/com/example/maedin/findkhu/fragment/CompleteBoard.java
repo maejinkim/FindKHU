@@ -33,7 +33,7 @@ public class CompleteBoard extends Fragment implements View.OnClickListener {
 
 
         listItem  = ((MyApp)getActivity().getApplication()).getListComplete();
-        
+
         //onclickListener 등록
         for(int i=0; i < listItem.size(); i++)
             listItem.get(i).onClickListener = this;

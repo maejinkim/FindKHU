@@ -68,6 +68,7 @@
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
+                android:id="@+id/btn_detail_map"
                 android:text="지도" />
 
         </TableRow>

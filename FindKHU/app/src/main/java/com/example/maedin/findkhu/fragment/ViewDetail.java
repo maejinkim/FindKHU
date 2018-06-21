@@ -1,5 +1,6 @@
 package com.example.maedin.findkhu.fragment;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ public class ViewDetail extends Fragment implements View.OnClickListener {
     TextView txt_content;
     Button btn_notice;
     Button btn_complete;
+    Button btn_map;
 
     private String[] cat = {"지갑","카드","가방","의류","휴대폰","귀금속","전자제품","기타"};
 
@@ -41,8 +44,10 @@ public class ViewDetail extends Fragment implements View.OnClickListener {
         txt_content = (TextView) view.findViewById(R.id.txt_contents);
         btn_notice = (Button) view.findViewById(R.id.btn_notice_check);
         btn_complete = (Button) view.findViewById(R.id.btn_complete);
+        btn_map = (Button) view.findViewById(R.id.btn_detail_map);
         btn_notice.setOnClickListener(this);
         btn_complete.setOnClickListener(this);
+        btn_map.setOnClickListener(this);
 
         txt_cat.setText("[ "+cat[infoItem.cat_id-1]+" ] ");
         txt_title.setText(infoItem.item_title);
@@ -77,11 +82,31 @@ public class ViewDetail extends Fragment implements View.OnClickListener {
             Toast.makeText(getActivity(), "즐겨찾기 추가!",Toast.LENGTH_SHORT).show();
             ((MyApp)getActivity().getApplication()).addNoticeItem(infoItem.item_id);
         }
+        else if (v.getId() == R.id.btn_detail_map)
+        {
+
+        }
         else
         {
             ((MyApp)getActivity().getApplication()).addComoleteItem(infoItem);
             ((MainActivity)getActivity()).replaceFragment(new LostBoard());
         }
+
+    }
+
+
+    public void showMap()
+    {
+
+
+        final LinearLayout dlg_layout = (LinearLayout)View.inflate(getActivity(), R.layout.view_map, null);
+
+        AlertDialog.Builder dlg = new AlertDialog.Builder(getActivity());
+        dlg.setTitle(infoItem.item_title);
+        dlg.setView(dlg_layout);
+        dlg.setPositiveButton("확인",null);
+
+
 
     }
 }
