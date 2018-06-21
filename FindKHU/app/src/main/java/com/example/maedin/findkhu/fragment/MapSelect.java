@@ -180,11 +180,10 @@ public class MapSelect extends Fragment implements OnMapReadyCallback, GoogleMap
                     locItem.loc_id = Integer.parseInt(loc_id);
                     ((MyApp)getActivity().getApplication()).addLocItem(locItem);
                     ((MyApp)getActivity().getApplication()).setLoc_id(Integer.parseInt(loc_id));
-                    if (((MyApp)getActivity().getApplication()).getPostSelect() == 1)
-                    {
-                        ((MainActivity)getActivity()).replaceFragment(((MyApp)getActivity().getApplication()).getLostPost());
 
-                    }
+                    ((MainActivity)getActivity()).replaceFragment(((MyApp)getActivity().getApplication()).getLostPost());
+
+
 
 
                 } else {

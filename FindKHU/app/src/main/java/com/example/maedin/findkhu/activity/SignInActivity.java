@@ -128,7 +128,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         Log.e("[login 화면] 로그인 완료", "메인 화면으로 넘어감");
-        finish();
+
     }
 
     @Override

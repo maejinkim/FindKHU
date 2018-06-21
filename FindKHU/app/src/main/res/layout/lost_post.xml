@@ -83,7 +83,7 @@
             android:layout_columnSpan="2"
             android:layout_height="150dp"
             android:layout_gravity="fill_horizontal"
-            android:background="#b8b8b8"
+            android:background="#ffdfdf"
             android:id="@+id/edit_lost_contents"/>
 
 

@@ -22,7 +22,6 @@ public class MyPage extends Fragment implements View.OnClickListener {
     Button btn_my_comment;
     Button btn_commented_post;
     Button btn_completed_post;
-    Button btn_and_more;
 
 
     @Nullable
@@ -36,13 +35,13 @@ public class MyPage extends Fragment implements View.OnClickListener {
         btn_my_comment = (Button) view.findViewById(R.id.myComment);
         btn_commented_post = (Button) view.findViewById(R.id.CommentedPost);
         btn_completed_post = (Button) view.findViewById(R.id.completedPost);
-        btn_and_more = (Button) view.findViewById(R.id.andMore);
+
 
         btn_edit_my_info.setOnClickListener(this);
         btn_my_comment.setOnClickListener(this);
         btn_commented_post.setOnClickListener(this);
         btn_completed_post.setOnClickListener(this);
-        btn_and_more.setOnClickListener(this);
+
 
         btn_my_comment.setSelected(true);
         return view;
@@ -56,7 +55,7 @@ public class MyPage extends Fragment implements View.OnClickListener {
         btn_my_comment.setSelected(false);
         btn_commented_post.setSelected(false);
         btn_completed_post.setSelected(false);
-        btn_and_more.setSelected(false);
+
 
         Activity root = getActivity();
 
@@ -79,9 +78,6 @@ public class MyPage extends Fragment implements View.OnClickListener {
                 Toast.makeText(root, "완료된 글", Toast.LENGTH_LONG).show();
                 break;
 
-            case R.id.andMore:
-                Toast.makeText(root, "즐겨찾기", Toast.LENGTH_LONG).show();
-                break;
 
         }
 

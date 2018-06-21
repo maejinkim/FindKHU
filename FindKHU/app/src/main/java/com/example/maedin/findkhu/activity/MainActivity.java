@@ -31,12 +31,13 @@ import com.example.maedin.findkhu.fragment.ViewDetail;
 import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.item.MemberInfoItem;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener{
 
     private DrawerLayout mDrawerLayout;
 
     MemberInfoItem memberInfoItem;
     TextView user_name;
+    Button btn_logout;
 
     View hview;
 
@@ -72,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         hview = navigationView.getHeaderView(0);
         user_name = (TextView) hview.findViewById(R.id.txt_userName);
         user_name.setText(memberInfoItem.user_name + " 님");
+
+        btn_logout = (Button) hview.findViewById(R.id.btn_logout) ;
+        btn_logout.setOnClickListener(this);
 
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
@@ -188,5 +192,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         manager.beginTransaction().replace(R.id.content_main, fragment).commit();
     }
 
-
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.btn_logout)
+        {
+            finish();
+        }
+    }
 }
