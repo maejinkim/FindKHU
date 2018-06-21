@@ -31,8 +31,6 @@ public class SearchResult extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.search_result, container, false);
 
-
-        view = inflater.inflate(R.layout.notice_view, container, false);
         listView = (ListView) view.findViewById(R.id.search_result_view);
 
 
