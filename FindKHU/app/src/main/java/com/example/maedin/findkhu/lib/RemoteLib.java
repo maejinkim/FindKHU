@@ -59,22 +59,34 @@ public class RemoteLib {
         }
     }
 
-    public void uploadMemberIcon(int memberSeq, File file) {
+    public String uploadItemImage2(String item_id, int item_type, File file) {
+        final String[] pic_id = {null};
         IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
 
-        // 설명 - RequestBody 에 wrap 되어서 데이터가 넘어감
-        RequestBody memberSeqBody = RequestBody.create(MediaType.parse("multipart/form-data"), "" + memberSeq);
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
 
-        // 파일 - MediaType.parse("multipart/form-data") 타입의 file File 객체를 담고 있는 RequestBody 를 만든다는 의미
-        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        // 서버에 파일을 전송하기 위해 필요하다
-        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("file", file.getName(), requestFile);
 
-        Call<ResponseBody> call = remoteService.uploadMemberIcon(memberSeqBody, body);
+        RequestBody ItemIdBody =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), "" + item_id);
+        RequestBody ItemTypeBody =
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), "" + item_type);
+
+        Call<ResponseBody> call =
+                remoteService.uploadFoodImage(ItemIdBody, ItemTypeBody, body);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if(response.isSuccessful()){
+                    try {
+                        pic_id[0] = response.body().string();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     Log.e("[ProfileIcon 확인]", "업로드 성공");
                 } else {
                     Log.e("[ProfileIcon 확인]", "업로드 오류");
@@ -86,6 +98,7 @@ public class RemoteLib {
                 Log.e("[ProfileIcon 확인]", "업로드 서버 실패");
             }
         });
+        return pic_id[0];
     }
 
     /**
