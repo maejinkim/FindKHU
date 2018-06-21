@@ -162,12 +162,5 @@ public class MyApp extends Application {
         listComplete.add(item);
         listItem.remove(item);
     }
-    //
-//    public FoodInfoItem getFoodInfoItem() {
-//        return foodInfoItem;
-//    }
 
-//    public void setFoodInfoItem(FoodInfoItem foodInfoItem) {
-//        this.foodInfoItem = foodInfoItem;
-//    }
 }

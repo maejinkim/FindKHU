@@ -31,16 +31,9 @@ router.post('/loc', function(req, res) {
   console.log({address , lat, lng});
 
   var sql_insert = "insert into location (loc_address, loc_lat, loc_lng) values (?, ?, ?);";
-  //var sql_get = "select *  from location order by loc_id desc limit 1;"
 
   db.get().query(sql_insert,[address,lat,lng], function (err, result) {
-      // if (err) return res.sendStatus(400);
-      //
-      // db.get().query(sql_get, function (err, result) {
-      //   if (err) return res.sendStatus(400);
-      //
-      //   res.status(200).send('' + result.loc_id);
-      // });
+
       if(err){
           console.log(err);
       }
@@ -57,16 +50,7 @@ router.post('/info', function(request, response, next) {
         return response.status(400).send("정보가 없습니다");
     }
     console.log("물품 등록");
-    // item_type
-    // item_id
-    // user_id
-    // item_title
-    // item_content
-    // item_reg_date
-    // item_date
-    // cat_id
-    // loc_id
-    // pic_id
+
 
     var item_type = request.body.item_type;
     var user_id = request.body.user_id;
@@ -146,13 +130,6 @@ router.get('/list/:info_seq', function(request, response, next){
     console.log("member_seq : "+member_seq);
     console.log("seq : "+seq);
 
-    // var sql =
-    // "select a.*, " +
-    // "  '0' as user_distance_meter, " +
-    // "  if( exists(select * from bestfood_keep where member_seq = ? and a.seq = info_seq), 'true', 'false') as is_keep, " +
-    // "  (select filename from bestfood_info_image where info_seq = a.seq order by seq limit 1) as image_filename " +
-    // "from bestfood_info as a " +
-    // "where seq = ? ; ";
     var sql = "select * from bestfood_info where member_seq = ? and seq = ?;";
     console.log("sql : " + sql);
 
@@ -178,17 +155,6 @@ router.get('/map/list', function(req, res, next) {
       return res.sendStatus(400);
   }
 
-  // var sql =
-  //   "select a.*, " +
-  //   "  (( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) " +
-  //   "  + sin( radians(?) ) * sin( radians( latitude ) ) ) ) * 1000) AS distance_meter," +
-  //   "  (( 6371 * acos( cos( radians(?) ) * cos( radians( latitude ) ) * cos( radians( longitude ) - radians(?) ) " +
-  //   "  + sin( radians(?) ) * sin( radians( latitude ) ) ) ) * 1000) AS user_distance_meter," +
-  //   "  IF(EXISTS (select * from bestfood_keep where member_seq = ? and a.seq = info_seq), 'true', 'false') as is_keep," +
-  //   "  (select filename from bestfood_info_image where info_seq = a.seq) as image_filename " +
-  //   "from bestfood_info as a " +
-  //   "having distance_meter <= ? " +
-  //   "order by user_distance_meter ";
   var sql = "select from bestfood_info where member_seq = ? and latitude = ? and longitude = ?"
   console.log("sql : " + sql);
 

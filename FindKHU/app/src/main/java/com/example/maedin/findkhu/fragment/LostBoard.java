@@ -171,32 +171,6 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
                 fragment.getView().setVisibility(View.INVISIBLE);
                 listView.setVisibility(View.VISIBLE);
 
-//                IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
-//                Call<String> call = remoteService.listFoodInfo(1);
-//                call.enqueue(new Callback<String>() {
-//                    @Override
-//                    public void onResponse(Call<String> call, Response<String> response) {
-//                            //listItem.add(response.body().get(0));
-//                        Toast.makeText(getActivity(),response.body(),Toast.LENGTH_SHORT).show();
-//
-//
-//                        if(response.isSuccessful() && list != null){
-//                            infoListAdapter.addItemList(list);
-//                            if(infoListAdapter.getItemCount() == 0){
-//                                noDataText.setVisibility(View.VISIBLE);
-//                            } else {
-//                                noDataText.setVisibility(View.GONE);
-//                            }
-//                       }
-//                    }
-//                    @Override
-//                    public void onFailure(Call<String> call, Throwable t) {
-//
-//                    }
-//                });
-//
-
-
                 //onclickListener 등록
                 for(int i=0; i < listItem.size(); i++)
                     listItem.get(i).onClickListener = this;

@@ -84,17 +84,11 @@ public class MapSelect extends Fragment implements OnMapReadyCallback, GoogleMap
 
         LatLng SEOUL = new LatLng(37.2418785, 127.0797748);
 
-        //지도 이동
-        //map.moveCamera(CameraUpdateFactory.newLatLng(SEOUL));
-        //map.animateCamera(CameraUpdateFactory.zoomTo(15));
 
         CameraPosition cp = new CameraPosition.Builder().target((SEOUL)).zoom(15).build();
         map.moveCamera(CameraUpdateFactory.newCameraPosition(cp));
 
-//        LatLng firstLocation = new LatLng(foodInfoItem.latitude, foodInfoItem.longitude);
-//        if(foodInfoItem.latitude != 0 && foodInfoItem.longitude != 0){
-//            addMarker(firstLocation, DEFAULT_ZOOM_LEVEL);
-//        }
+
     }
 
     @Override

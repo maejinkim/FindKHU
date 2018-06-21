@@ -89,11 +89,5 @@ public class ListViewAdapter extends BaseAdapter {
         return listVO.get(position);
     }
 
-//    //데이터값 추가
-//    public void addVO(String text)
-//    {
-//        InfoItem item = new InfoItem();
-//        item.setText(text);
-//        listVO.add(item);
-//    }
+
 }

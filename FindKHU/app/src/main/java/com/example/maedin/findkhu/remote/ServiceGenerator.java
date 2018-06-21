@@ -13,18 +13,6 @@ public class ServiceGenerator {
      */
     public static <S> S createService(Class<S> serviceClass){
 
-//        // 네트워크 과정에서 로그를 기록하는 장치인 듯 하다. ***필요 없음***
-//        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-//        if(BuildConfig.DEBUG){
-//            logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
-//        } else {
-//            logging.setLevel(HttpLoggingInterceptor.Level.NONE);
-//        }
-//
-//        // ***필요 없음***
-//        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-//        httpClient.addInterceptor(logging);
-
 
         // 결국 이곳에서 레트로핏의 핵심 생성
         Retrofit retrofit = new Retrofit.Builder()

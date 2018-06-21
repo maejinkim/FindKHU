@@ -103,27 +103,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
 
-//    private void CheckLoginInfo(final LoginItem loginItem) {
-//
-//        IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
-//        Call<MemberInfoItem> call = remoteService.selectMemberInfo(loginItem.id);
-//
-//        call.enqueue(new Callback<MemberInfoItem>() {
-//            @Override
-//            public void onResponse(Call<MemberInfoItem> call, Response<MemberInfoItem> response) {
-//                Log.e("[login화면] 계정 불러오기", "성공");
-//                MemberInfoItem item = response.body();
-//                ((MyApp) getApplicationContext()).setMemberInfoItem(item);
-//                startMain();
-//            }
-//            @Override
-//            public void onFailure(Call<MemberInfoItem> _call, Throwable _t) {
-//                Log.e("[login화면] 계정 불러오기", "서버 통신에 실패");
-//                Toast.makeText(SignInActivity.this, "서버 통신에 실패했습니다", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-
     private void startMain(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
