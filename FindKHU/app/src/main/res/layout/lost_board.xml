@@ -8,6 +8,7 @@
 
 
     <TextView
+        android:id="@+id/board_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="분실물 게시판"
