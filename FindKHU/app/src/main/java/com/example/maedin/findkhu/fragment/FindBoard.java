@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.maedin.findkhu.R;
 import com.example.maedin.findkhu.adapter.ListViewAdapter;
+import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.list.ListVO;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -26,6 +27,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FindBoard extends Fragment implements OnMapReadyCallback,  View.OnClickListener {
 
@@ -104,20 +106,20 @@ public class FindBoard extends Fragment implements OnMapReadyCallback,  View.OnC
                 fragment.getView().setVisibility(View.INVISIBLE);
                 listView.setVisibility(View.VISIBLE);
 
-                ArrayList<ListVO> listItem = new ArrayList<>();
+              //  List<InfoItem> listItem = new List<InfoItem>();
 
 
-                //어뎁터를 통한 값 전달
-                for(int i=0; i < 20; i++)
-                {
-                    ListVO item = new ListVO();
-                    item.setText(i+"번째 정보");
-                    item.onClickListener = this;
-                    listItem.add(item);
-                }
-                //어뎁터 할당
-                adapter = new ListViewAdapter(listItem);
-                listView.setAdapter(adapter);
+//                //어뎁터를 통한 값 전달
+//                for(int i=0; i < 20; i++)
+//                {
+//                    ListVO item = new ListVO();
+//                    item.setText(i+"번째 정보");
+//                    item.onClickListener = this;
+//                    listItem.add(item);
+//                }
+//                //어뎁터 할당
+//                adapter = new ListViewAdapter(listItem);
+//                listView.setAdapter(adapter);
 
                 break;
             }

@@ -152,10 +152,7 @@ public interface IRemoteService {
      */
     // item type에 따른 가져오기
     @GET("/item/list")
-    Call<List<InfoItem>> listFoodInfo(@Query("user_id") int user_id,
-                                          @Query("item_type") double item_type
-
-    );
+    Call<ArrayList<InfoItem>> listFoodInfo(@Query("item_type") int item_type );
 
     /**
      * BestFoodInfoActivity

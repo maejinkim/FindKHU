@@ -376,7 +376,7 @@ public class LostPost extends Fragment implements View.OnClickListener{
         infoItem.user_id = ((MyApp)getActivity().getApplication()).getMemberID();
         infoItem.item_title = edit_title.getText().toString();
         infoItem.item_content = edit_contents.getText().toString();
-        infoItem.item_reg_date = edit_date.getText().toString();
+        infoItem.item_date = edit_date.getText().toString();
         infoItem.loc_id = ((MyApp)getActivity().getApplication()).getLoc_id();
         infoItem.pic_id = ((MyApp)getActivity().getApplication()).getPic_id();
 

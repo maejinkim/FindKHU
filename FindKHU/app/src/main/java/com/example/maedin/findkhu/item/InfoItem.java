@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.google.gson.annotations.SerializedName;
 
-
+import java.util.Date;
 
 
 /**
@@ -20,12 +20,12 @@ public class InfoItem implements Parcelable{
     public String user_id;
     public String item_title;
     public String item_content;
-    public String item_reg_date;
+    public Date item_reg_date;
     public String item_date;
     public int cat_id;
     public int loc_id;
     public int pic_id;
-    public View.OnClickListener onClickListener;
+    //public View.OnClickListener onClickListener;
 
     public InfoItem()
     {
@@ -38,8 +38,8 @@ public class InfoItem implements Parcelable{
         user_id=in.readString();
         item_title=in.readString();
         item_content=in.readString();
-        item_reg_date=in.readString();
-        item_date=in.readString();
+//        item_reg_date=in.readString();
+//        item_date=in.readD;
     }
     public static final Creator<InfoItem> CREATOR = new Creator<InfoItem>() {
         @Override
@@ -80,7 +80,7 @@ public class InfoItem implements Parcelable{
         dest.writeString(user_id);
         dest.writeString(item_title);
         dest.writeString(item_content);
-        dest.writeString(item_reg_date);
+//        dest.writeString(item_reg_date);
         dest.writeString(item_date);
         dest.writeInt(cat_id);
         dest.writeInt(loc_id);

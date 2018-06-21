@@ -43,6 +43,8 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
     GoogleMap map;
     SupportMapFragment fragment;
 
+    ArrayList<InfoItem> listItem;
+
     private ListView listView;
     private ListViewAdapter adapter;
 
@@ -58,6 +60,7 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.lost_board, container, false);
 
+        listItem = new ArrayList<>();
 
         //변수 초기화
 
@@ -112,43 +115,52 @@ public class LostBoard extends Fragment implements OnMapReadyCallback,  View.OnC
             case R.id.btn_view_lost_board:
             {
 
-                Activity root = getActivity();
-                Toast.makeText(root, "클릭", Toast.LENGTH_LONG).show();
 
                 fragment.getView().setVisibility(View.INVISIBLE);
                 listView.setVisibility(View.VISIBLE);
 
                 //ArrayList<ListVO> listItem = new ArrayList<>();
-                ArrayList<InfoItem> listItem;
+
 
                 IRemoteService remoteService = ServiceGenerator.createService(IRemoteService.class);
-                Call<List<InfoItem>> call = remoteService.listFoodInfo(1);
-                call.enqueue(new Callback<List<InfoItem>>() {
+                Call<ArrayList<InfoItem>> call = remoteService.listFoodInfo(1);
+                call.enqueue(new Callback<ArrayList<InfoItem>>() {
                     @Override
-                    public void onResponse(Call<List<InfoItem>> call, Response<List<InfoItem>> response) {
-                        List<InfoItem> list = response.body();
-                        if(response.isSuccessful() && list != null){
-                            infoListAdapter.addItemList(list);
-                            if(infoListAdapter.getItemCount() == 0){
-                                noDataText.setVisibility(View.VISIBLE);
-                            } else {
-                                noDataText.setVisibility(View.GONE);
-                            }
-                        }
+                    public void onResponse(Call<ArrayList<InfoItem>> call, Response<ArrayList<InfoItem>> response) {
+                            listItem = response.body();
+                            
+
+//                        if(response.isSuccessful() && list != null){
+//                            infoListAdapter.addItemList(list);
+////                            if(infoListAdapter.getItemCount() == 0){
+////                                noDataText.setVisibility(View.VISIBLE);
+////                            } else {
+////                                noDataText.setVisibility(View.GONE);
+////                            }
+//                        }
                     }
                     @Override
-                    public void onFailure(Call<List<InfoItem>> call, Throwable t) {
+                    public void onFailure(Call<ArrayList<InfoItem>> call, Throwable t) {
 
                     }
                 });
 
-                //onclickListener 등록
-                for(int i=0; i < listItem.size(); i++)
-                    listItem.get(i).onClickListener = this;
+
+
+//                //onclickListener 등록
+//                for(int i=0; i < listItem.size(); i++)
+//                    listItem.get(i).onClickListener = this;
 
                 //어뎁터 할당
+                if (listItem == null)
+                {
+                    Toast.makeText(getActivity(),"데이터 없음",Toast.LENGTH_SHORT).show();
+                }
+
                 adapter = new ListViewAdapter(listItem);
                 listView.setAdapter(adapter);
+
+
 
                 break;
             }

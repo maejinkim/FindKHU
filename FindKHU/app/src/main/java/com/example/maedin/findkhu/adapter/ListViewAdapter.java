@@ -14,6 +14,7 @@ import com.example.maedin.findkhu.item.InfoItem;
 import com.example.maedin.findkhu.list.ListVO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListViewAdapter extends BaseAdapter {
 
