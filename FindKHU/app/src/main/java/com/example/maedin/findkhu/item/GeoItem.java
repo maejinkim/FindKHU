@@ -17,7 +17,7 @@ public class GeoItem {
     public static LatLng getKnownLocation(){
         // 저장한 주소가 없으면 서울 주소값 리턴
         if(knownLatitude == 0 || knownLongitude == 0){
-            return new LatLng(37.566229, 126.977689);
+            return new LatLng(37.2418785, 127.0797748);
         } else {
             return new LatLng(knownLatitude, knownLongitude);
         }

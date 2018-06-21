@@ -59,8 +59,9 @@ public class GeoLib {
             GeoItem.knownLongitude = location.getLongitude();
         } else {
             //서울 설정
-            GeoItem.knownLatitude = 37.566229;
-            GeoItem.knownLongitude = 126.977689;
+
+            GeoItem.knownLatitude = 37.2418785;
+            GeoItem.knownLongitude = 127.0797748;
         }
     }
 
