@@ -1,5 +1,6 @@
 package com.example.maedin.findkhu.activity;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.annotation.NonNull;
@@ -83,6 +84,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .beginTransaction()
                 .replace(R.id.content_main, new Home())
                 .commit();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        for(Fragment fragment : getSupportFragmentManager().getFragments()){
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override

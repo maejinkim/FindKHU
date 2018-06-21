@@ -153,11 +153,12 @@ public class LostPost extends Fragment implements View.OnClickListener{
 
             case R.id.btn_lost_pic:
                 showImageDialog(context);
-                saveImage();
 
+//
                 break;
 
             case R.id.btn_lost_post_ok:
+                saveImage();
                 postUpload();
 
                 break;
@@ -199,7 +200,8 @@ public class LostPost extends Fragment implements View.OnClickListener{
     private void getImageFromAlbum() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-        context.startActivityForResult(intent, PICK_FROM_ALBUM);
+        intent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, PICK_FROM_ALBUM);
     }
 
 

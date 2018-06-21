@@ -80,7 +80,7 @@ router.post('/info', function(request, response, next) {
 
     var sql_insert =
     "insert into item (item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id, pic_id)"
-    + " values(?,?,?,?,?,?,?,?); ";
+    + " values(?,?,?,?,?,?,?,?,?); ";
     var value = [item_type, user_id, item_title, item_content, item_reg_date, item_date, cat_id, loc_id, pic_id];
     console.log("sql_insert : "+sql_insert);
 
