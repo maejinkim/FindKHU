@@ -215,26 +215,35 @@ public class LostPost extends Fragment implements View.OnClickListener{
 
             } else if (requestCode == PICK_FROM_ALBUM && data != null) {
                 Uri dataUri = data.getData();
+                Picasso.with(context).load(imageFile).into(image);
 
-                if (dataUri != null) {
-                    Picasso.with(context).load(dataUri).into(image);
+                ((MyApp)getActivity().getApplication()).setPic_id(Integer.parseInt(RemoteLib.getInstance().uploadItemImage(imageItem.item_id,
+                        imageItem.item_type, imageFile, finishHandler)));
 
-                    Picasso.with(context).load(dataUri).into(new Target() {
-                        @Override
-                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                            BitmapLib.getInstance().saveBitmapToFileThread(imageUploadHandler,
-                                    imageFile, bitmap);
-                            isSavingImage = true;
-                        }
+                //RemoteLib.getInstance().uploadMemberIcon(memberInfoItem.seq, profileIconFile);
 
-                        @Override
-                        public void onBitmapFailed(Drawable errorDrawable) {
-                        }
+                memberInfoItem.memberIconFilename = profileIconFileName + ".png";
 
-                        @Override
-                        public void onPrepareLoad(Drawable placeHolderDrawable) {
-                        }
-                    });
+
+//                if (dataUri != null) {
+//                    Picasso.with(context).load(dataUri).into(image);
+//
+//                    Picasso.with(context).load(dataUri).into(new Target() {
+//                        @Override
+//                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+//                            BitmapLib.getInstance().saveBitmapToFileThread(imageUploadHandler,
+//                                    imageFile, bitmap);
+//                            isSavingImage = true;
+//                        }
+//
+//                        @Override
+//                        public void onBitmapFailed(Drawable errorDrawable) {
+//                        }
+//
+//                        @Override
+//                        public void onPrepareLoad(Drawable placeHolderDrawable) {
+//                        }
+//                    });
                 }
             }
         }
