@@ -409,14 +409,9 @@ public class LostPost extends Fragment implements View.OnClickListener{
                     ((MyApp)getActivity().getApplication()).addInfoItem(infoItem);
 
 
-                    if (((MyApp)getActivity().getApplication()).getPostSelect() == 1)
-                    {
+
                         ((MainActivity)getActivity()).replaceFragment(new LostBoard());
-                    }
-                    else
-                    {
-                        ((MainActivity)getActivity()).replaceFragment(new FindBoard());
-                    }
+
 
 
                 } else {

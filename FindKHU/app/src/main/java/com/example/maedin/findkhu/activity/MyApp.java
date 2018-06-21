@@ -25,6 +25,7 @@ public class MyApp extends Application {
     private ArrayList<LocItem> listIoc;
     private ArrayList<ImageItem> listImg;
     private ArrayList<Integer> listNotice;
+    private ArrayList<InfoItem> listComplete;
     private int loc_id;
     private int pic_id;
     private int postSelect;
@@ -39,6 +40,7 @@ public class MyApp extends Application {
         listIoc = new ArrayList<>();
         listImg = new ArrayList<>();
         listNotice = new ArrayList<>();
+        listComplete =new ArrayList<>();
 
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -147,6 +149,19 @@ public class MyApp extends Application {
         this.listNotice = listNotice;
     }
 
+    public ArrayList<InfoItem> getListComplete() {
+        return listComplete;
+    }
+
+    public void setListComplete(ArrayList<InfoItem> listComplete) {
+        this.listComplete = listComplete;
+    }
+
+    public void addComoleteItem(InfoItem item)
+    {
+        listComplete.add(item);
+        listItem.remove(item);
+    }
     //
 //    public FoodInfoItem getFoodInfoItem() {
 //        return foodInfoItem;
